@@ -1,14 +1,15 @@
 <?php
 /**
- * @package     eden
- * @filesource  autoload.php
- * @version     1.0.0
- * @since       31.05.17 - 15:30
- * @author      Patrick Froch <info@easySolutionsIT.de>
- * @link        http://easySolutionsIT.de
- * @copyright   e@sy Solutions IT 2017
- * @license     EULA
+ * con4gis - the gis-kit
+ *
+ * @version   php 5
+ * @package   con4gis
+ * @author    con4gis contributors (see "authors.txt")
+ * @license   GNU/LGPL http://opensource.org/licenses/lgpl-3.0.html
+ * @copyright Küstenschmiede GmbH Software & Design 2011 - 2017.
+ * @link      https://www.kuestenschmiede.de
  */
+
 /**
  * Variables
  */
