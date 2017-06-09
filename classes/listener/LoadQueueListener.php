@@ -55,6 +55,8 @@ class LoadQueueListener
         $count          = $event->getCount();
         $query          = "SELECT * FROM $table WHERE ";
         $query         .= " kind = '$kind'";
+        $query         .= " AND endworking = 0";
+        $query         .= " AND startworking = 0";
         $query         .= " ORDER BY priority, id";
         $query         .= " LIMIT 0,$count";
         $event->setQuery($query);
