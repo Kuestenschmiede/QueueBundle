@@ -166,7 +166,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'inputType'               => 'text',
             'eval'                    => array('maxlength'=>255),
-            'sql'                     => "text NOT NULL "
+            'sql'                     => "text NOT NULL"
         )
 	)
 );
