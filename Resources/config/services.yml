@@ -6,14 +6,14 @@ services:
 
     # AddToQueue
     con4gis_queue.onAddToQueueListenerQuery:
-        class: con4gis\Queue\Classes\Listener\AddToQueueListener
+        class: con4gis\QueueBundle\Classes\Listener\AddToQueueListener
         tags:
             - { name: kernel.event_listener, event: con4gis.queue.addtoqueue, method: onAddToQueueListenerQuery }
         arguments:
 #            - '@doctrine.orm.default_entity_manager'
 
     con4gis_queue.onAddToQueueListenerRun:
-        class: con4gis\Queue\Classes\Listener\AddToQueueListener
+        class: con4gis\QueueBundle\Classes\Listener\AddToQueueListener
         tags:
             - { name: kernel.event_listener, event: con4gis.queue.addtoqueue, method: onAddToQueueListenerRun }
         arguments:
@@ -22,14 +22,14 @@ services:
 
     # LoadQueue
     con4gis_queue.onLoadQueueListenerQuery:
-        class: con4gis\Queue\Classes\Listener\LoadQueueListener
+        class: con4gis\QueueBundle\Classes\Listener\LoadQueueListener
         tags:
             - { name: kernel.event_listener, event: con4gis.queue.loadqueue, method: onLoadQueueListenerQuery }
         arguments:
 #            - '@doctrine.orm.default_entity_manager'
 
     con4gis_queue.onLoadQueueListenerRun:
-        class: con4gis\Queue\Classes\Listener\LoadQueueListener
+        class: con4gis\QueueBundle\Classes\Listener\LoadQueueListener
         tags:
             - { name: kernel.event_listener, event: con4gis.queue.loadqueue, method: onLoadQueueListenerRun }
         arguments:
@@ -38,14 +38,14 @@ services:
 
     # SetStartTime
     con4gis_queue.onSetStartTimeListenerQuery:
-        class: con4gis\Queue\Classes\Listener\QueueSetStartTimeListener
+        class: con4gis\QueueBundle\Classes\Listener\QueueSetStartTimeListener
         tags:
             - { name: kernel.event_listener, event: con4gis.queue.setstarttime, method: onSetStartTimeListenerQuery }
         arguments:
 #            - '@doctrine.orm.default_entity_manager'
 
     con4gis_queue.onSetStartTimeListenerRun:
-        class: con4gis\Queue\Classes\Listener\QueueSetStartTimeListener
+        class: con4gis\QueueBundle\Classes\Listener\QueueSetStartTimeListener
         tags:
             - { name: kernel.event_listener, event: con4gis.queue.setstarttime, method: onSetStartTimeListenerRun }
         arguments:
@@ -54,14 +54,14 @@ services:
 
     # SetEndTime
     con4gis_queue.onSetEndTimeListenerQuery:
-        class: con4gis\Queue\Classes\Listener\QueueSetEndTimeListener
+        class: con4gis\QueueBundle\Classes\Listener\QueueSetEndTimeListener
         tags:
             - { name: kernel.event_listener, event: con4gis.queue.setendtime, method: onSetEndTimeListenerQuery }
         arguments:
 #            - '@doctrine.orm.default_entity_manager'
 
     con4gis_queue.onSetEndTimeListenerRun:
-        class: con4gis\Queue\Classes\Listener\QueueSetEndTimeListener
+        class: con4gis\QueueBundle\Classes\Listener\QueueSetEndTimeListener
         tags:
             - { name: kernel.event_listener, event: con4gis.queue.setendtime, method: onSetEndTimeListenerRun }
         arguments:

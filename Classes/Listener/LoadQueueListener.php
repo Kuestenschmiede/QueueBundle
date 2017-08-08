@@ -9,15 +9,15 @@
  * @copyright Küstenschmiede GmbH Software & Design 2011 - 2017.
  * @link      https://www.kuestenschmiede.de
  */
-namespace con4gis\Queue\Classes\Listener;
+namespace con4gis\QueueBundle\Classes\Listener;
 
-use con4gis\Queue\Classes\Events\LoadQueueEvent;
+use con4gis\QueueBundle\Classes\Events\LoadQueueEvent;
 use Contao\Database;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class LoadQueueListener
- * @package con4gis\Queue\Classes\Listener
+ * @package con4gis\QueueBundle\Classes\Listener
  */
 class LoadQueueListener
 {

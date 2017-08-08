@@ -7,13 +7,13 @@
  * @copyright Küstenschmiede GmbH Software & Design 2016 - 2017.
  * @link      https://www.kuestenschmiede.de
  */
-namespace con4gis\Queue\Classes\Events;
+namespace con4gis\QueueBundle\Classes\Events;
 
 use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class QueueSetEndTimeEvent
- * @package con4gis\Queue\Classes\Events
+ * @package con4gis\QueueBundle\Classes\Events
  */
 class QueueSetEndTimeEvent extends Event
 {

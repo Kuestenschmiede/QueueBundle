@@ -9,17 +9,17 @@
  * @copyright   e@sy Solutions IT 2017
  * @license     EULA
  */
-namespace con4gis\Queue\Classes\Queue;
+namespace con4gis\QueueBundle\Classes\Queue;
 
-use con4gis\Queue\Classes\Events\AddToQueueEvent;
-use con4gis\Queue\Classes\Events\LoadQueueEvent;
-use con4gis\Queue\Classes\Events\QueueSetEndTimeEvent;
-use con4gis\Queue\Classes\Events\QueueSetStartTimeEvent;
+use con4gis\QueueBundle\Classes\Events\AddToQueueEvent;
+use con4gis\QueueBundle\Classes\Events\LoadQueueEvent;
+use con4gis\QueueBundle\Classes\Events\QueueSetEndTimeEvent;
+use con4gis\QueueBundle\Classes\Events\QueueSetStartTimeEvent;
 use Contao\System;
 
 /**
  * Class QueueManager
- * @package con4gis\Queue\Classes\Queue
+ * @package con4gis\QueueBundle\Classes\Queue
  */
 class QueueManager
 {
