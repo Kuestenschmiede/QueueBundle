@@ -1,19 +1,19 @@
 <?php
 /**
- * Eden
+ * con4gis
  * @version   2.0.0
- * @package   eden
- * @author    eden authors (see "authors.txt")
+ * @package   con4gis
+ * @author    con4gis authors (see "authors.txt")
  * @copyright Küstenschmiede GmbH Software & Design 2016 - 2017.
  * @link      https://www.kuestenschmiede.de
  */
-namespace con4gis_queue\classes\events;
+namespace con4gis\Queue\Classes\Events;
 
 use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class QueueSetStartTimeEvent
- * @package con4gis_queue\classes\events
+ * @package con4gis\Queue\Classes\Events
  */
 class QueueSetStartTimeEvent extends Event
 {

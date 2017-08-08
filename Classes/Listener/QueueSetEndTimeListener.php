@@ -9,17 +9,17 @@
  * @copyright Küstenschmiede GmbH Software & Design 2011 - 2017.
  * @link      https://www.kuestenschmiede.de
  */
-namespace con4gis_queue\classes\listener;
+namespace con4gis\Queue\Classes\Listener;
 
-use con4gis_queue\classes\events\LoadQueueEvent;
+use con4gis\Queue\Classes\Events\QueueSetEndTimeEvent;
 use Contao\Database;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class LoadQueueListener
- * @package con4gis_queue\classes\listener
+ * Class QueueSetEndTimeListener
+ * @package con4gis\Queue\Classes\Listener
  */
-class LoadQueueListener
+class QueueSetEndTimeListener
 {
 
 
@@ -46,35 +46,35 @@ class LoadQueueListener
 
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
-     * @param LoadQueueEvent            $event
+     * @param QueueSetEndTimeEvent     $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
      */
-    public function onLoadQueueListenerQuery(LoadQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
-    {
-        $kind           = $event->getKind();
+    public function onSetEndTimeListenerQuery(
+        QueueSetEndTimeEvent $event,
+        $eventName,
+        EventDispatcherInterface $dispatcher
+    ) {
         $table          = $event->getQueueTable();
-        $count          = $event->getCount();
-        $query          = "SELECT * FROM $table WHERE ";
-        $query         .= " kind = '$kind'";
-        $query         .= " AND endworking = 0";
-        $query         .= " AND startworking = 0";
-        $query         .= " ORDER BY priority, id";
-        $query         .= " LIMIT 0,$count";
+        $field          = $event->getField();
+        $id             = $event->getId();
+        $query          = "UPDATE $table SET $field = " . time() . " WHERE id = $id";
         $event->setQuery($query);
     }
 
 
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
-     * @param LoadQueueEvent            $event
+     * @param QueueSetEndTimeEvent     $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
      */
-    public function onLoadQueueListenerRun(LoadQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
-    {
-        $query  = $event->getQuery();
-        $result = $this->database->execute($query);
-        $event->setEvents($result);
+    public function onSetEndTimeListenerRun(
+        QueueSetEndTimeEvent $event,
+        $eventName,
+        EventDispatcherInterface $dispatcher
+    ) {
+        $query = $event->getQuery();
+        $this->database->execute($query);
     }
 }

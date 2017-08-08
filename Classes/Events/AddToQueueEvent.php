@@ -1,28 +1,28 @@
 <?php
 /**
- * Eden
+ * con4gis
  * @version   2.0.0
- * @package   eden
- * @author    eden authors (see "authors.txt")
+ * @package   con4gis
+ * @author    con4gis authors (see "authors.txt")
  * @copyright Küstenschmiede GmbH Software & Design 2016 - 2017.
  * @link      https://www.kuestenschmiede.de
  */
-namespace con4gis_queue\classes\events;
+namespace con4gis\Queue\Classes\Events;
 
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class QueueSetEndTimeEvent
- * @package con4gis_queue\classes\events
+ * Class AddToQueueEvent
+ * @package con4gis\Queue\Classes\Events
  */
-class QueueSetEndTimeEvent extends Event
+class AddToQueueEvent extends Event
 {
 
 
     /**
      * Name des Events
      */
-    const NAME = 'con4gis.queue.setendtime';
+    const NAME = 'con4gis.queue.addtoqueue';
 
 
     /**
@@ -33,21 +33,28 @@ class QueueSetEndTimeEvent extends Event
 
 
     /**
-     * Name des Felds in welches die Startzeit eingtragen werden soll.
+     * Name des Events
      * @var string
      */
-    protected $field = 'endworking';
+    protected $kind = '';
 
 
     /**
-     * Name des Events
+     * Priorität des Events.
      * @var int
      */
-    protected $id = 0;
+    protected $priority = 1024;
 
 
     /**
-     * Query für das Eintragen der Endzeit.
+     * Event, welches auf in die Queue eingefügt werden soll.
+     * @var Event
+     */
+    protected $event = null;
+
+
+    /**
+     * Query für das Einfügen der Daten in die Queue.
      * @var string
      */
     protected $query = '';
@@ -74,36 +81,55 @@ class QueueSetEndTimeEvent extends Event
     /**
      * @return string
      */
-    public function getField(): string
+    public function getKind(): string
     {
-        return $this->field;
+        return $this->kind;
     }
 
 
     /**
-     * @param string $field
+     * @param string $kind
      */
-    public function setField(string $field)
+    public function setKind(string $kind)
     {
-        $this->field = $field;
+        $this->kind = $kind;
     }
 
 
     /**
      * @return int
      */
-    public function getId(): int
+    public function getPriority(): int
     {
-        return $this->id;
+        return $this->priority;
     }
 
 
     /**
-     * @param int $id
+     * @param int $priority
      */
-    public function setId(int $id)
+    public function setPriority(int $priority)
     {
-        $this->id = $id;
+        $this->priority = $priority;
+    }
+
+
+    /**
+     * @return Event
+     */
+    public function getEvent(): Event
+    {
+        return $this->event;
+    }
+
+
+    /**
+     * @param Event $event
+     */
+    public function setEvent(Event $event)
+    {
+        $this->event = $event;
+        $this->setKind($event::NAME);
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package     eden
+ * @package     con4gis
  * @filesource  QueueManager.php
  * @version     1.0.0
  * @since       03.06.17 - 17:12
@@ -9,17 +9,17 @@
  * @copyright   e@sy Solutions IT 2017
  * @license     EULA
  */
-namespace con4gis_queue\classes\queue;
+namespace con4gis\Queue\Classes\Queue;
 
-use con4gis_queue\classes\events\AddToQueueEvent;
-use con4gis_queue\classes\events\LoadQueueEvent;
-use con4gis_queue\classes\events\QueueSetEndTimeEvent;
-use con4gis_queue\classes\events\QueueSetStartTimeEvent;
+use con4gis\Queue\Classes\Events\AddToQueueEvent;
+use con4gis\Queue\Classes\Events\LoadQueueEvent;
+use con4gis\Queue\Classes\Events\QueueSetEndTimeEvent;
+use con4gis\Queue\Classes\Events\QueueSetStartTimeEvent;
 use Contao\System;
 
 /**
  * Class QueueManager
- * @package con4gis_queue\classes\queue
+ * @package con4gis\Queue\Classes\Queue
  */
 class QueueManager
 {

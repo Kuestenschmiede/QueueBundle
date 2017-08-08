@@ -1,28 +1,29 @@
 <?php
 /**
- * Eden
+ * con4gis
  * @version   2.0.0
- * @package   eden
- * @author    eden authors (see "authors.txt")
+ * @package   con4gis
+ * @author    con4gis authors (see "authors.txt")
  * @copyright Küstenschmiede GmbH Software & Design 2016 - 2017.
  * @link      https://www.kuestenschmiede.de
  */
-namespace con4gis_queue\classes\events;
+namespace con4gis\Queue\Classes\Events;
 
+use Database\Result;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class AddToQueueEvent
- * @package con4gis_queue\classes\events
+ * Class LoadQueueEvent
+ * @package con4gis\Queue\Classes\Events
  */
-class AddToQueueEvent extends Event
+class LoadQueueEvent extends Event
 {
 
 
     /**
      * Name des Events
      */
-    const NAME = 'con4gis.queue.addtoqueue';
+    const NAME = 'con4gis.queue.loadqueue';
 
 
     /**
@@ -33,6 +34,13 @@ class AddToQueueEvent extends Event
 
 
     /**
+     * Anzahl der zuladenen Datensätze.
+     * @var int
+     */
+    protected $count = 0;
+
+
+    /**
      * Name des Events
      * @var string
      */
@@ -40,24 +48,17 @@ class AddToQueueEvent extends Event
 
 
     /**
-     * Priorität des Events.
-     * @var int
-     */
-    protected $priority = 1024;
-
-
-    /**
-     * Event, welches auf in die Queue eingefügt werden soll.
-     * @var Event
-     */
-    protected $event = null;
-
-
-    /**
      * Query für das Einfügen der Daten in die Queue.
      * @var string
      */
     protected $query = '';
+
+
+    /**
+     * Events, welche von der Queue geleade wurden.
+     * @var Result
+     */
+    protected $events = null;
 
 
     /**
@@ -99,37 +100,18 @@ class AddToQueueEvent extends Event
     /**
      * @return int
      */
-    public function getPriority(): int
+    public function getCount(): int
     {
-        return $this->priority;
+        return $this->count;
     }
 
 
     /**
-     * @param int $priority
+     * @param int $count
      */
-    public function setPriority(int $priority)
+    public function setCount(int $count)
     {
-        $this->priority = $priority;
-    }
-
-
-    /**
-     * @return Event
-     */
-    public function getEvent(): Event
-    {
-        return $this->event;
-    }
-
-
-    /**
-     * @param Event $event
-     */
-    public function setEvent(Event $event)
-    {
-        $this->event = $event;
-        $this->setKind($event::NAME);
+        $this->count = $count;
     }
 
 
@@ -148,5 +130,23 @@ class AddToQueueEvent extends Event
     public function setQuery(string $query)
     {
         $this->query = $query;
+    }
+
+
+    /**
+     * @return Result
+     */
+    public function getEvents(): Result
+    {
+        return $this->events;
+    }
+
+
+    /**
+     * @param Result $events
+     */
+    public function setEvents(Result $events)
+    {
+        $this->events = $events;
     }
 }

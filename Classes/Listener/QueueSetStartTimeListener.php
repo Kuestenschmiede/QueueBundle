@@ -9,15 +9,15 @@
  * @copyright Küstenschmiede GmbH Software & Design 2011 - 2017.
  * @link      https://www.kuestenschmiede.de
  */
-namespace con4gis_queue\classes\listener;
+namespace con4gis\Queue\Classes\Listener;
 
-use con4gis_queue\classes\events\QueueSetStartTimeEvent;
+use con4gis\Queue\Classes\Events\QueueSetStartTimeEvent;
 use Contao\Database;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class QueueSetStartTimeListener
- * @package con4gis_queue\classes\listener
+ * @package con4gis\Queue\Classes\Listener
  */
 class QueueSetStartTimeListener
 {

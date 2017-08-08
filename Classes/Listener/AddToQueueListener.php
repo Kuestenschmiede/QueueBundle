@@ -9,17 +9,17 @@
  * @copyright Küstenschmiede GmbH Software & Design 2011 - 2017.
  * @link      https://www.kuestenschmiede.de
  */
-namespace con4gis_queue\classes\listener;
+namespace con4gis\Queue\Classes\Listener;
 
-use con4gis_queue\classes\events\QueueSetEndTimeEvent;
+use con4gis\Queue\Classes\Events\AddToQueueEvent;
 use Contao\Database;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class QueueSetEndTimeListener
- * @package con4gis_queue\classes\listener
+ * Class AddToQueueListener
+ * @package con4gis\Queue\Classes\Listener
  */
-class QueueSetEndTimeListener
+class AddToQueueListener
 {
 
 
@@ -46,34 +46,34 @@ class QueueSetEndTimeListener
 
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
-     * @param QueueSetEndTimeEvent     $event
+     * @param AddToQueueEvent          $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
      */
-    public function onSetEndTimeListenerQuery(
-        QueueSetEndTimeEvent $event,
-        $eventName,
-        EventDispatcherInterface $dispatcher
-    ) {
+    public function onAddToQueueListenerQuery(AddToQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
+    {
+        $eventToSave    = $event->getEvent();
+        $eventToSave    = serialize($eventToSave);
+        $eventToSave    = urlencode($eventToSave);  // Ohne urlencode speichert Contao das serialisierte Event nicht!
+        $priotity       = $event->getPriority();
+        $kind           = $event->getKind();
         $table          = $event->getQueueTable();
-        $field          = $event->getField();
-        $id             = $event->getId();
-        $query          = "UPDATE $table SET $field = " . time() . " WHERE id = $id";
+        $query          = "INSERT INTO $table SET tstamp = " . time();
+        $query         .= ", kind = '$kind'";
+        $query         .= ", priority = $priotity";
+        $query         .= ", data = '$eventToSave'";
         $event->setQuery($query);
     }
 
 
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
-     * @param QueueSetEndTimeEvent     $event
+     * @param AddToQueueEvent          $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
      */
-    public function onSetEndTimeListenerRun(
-        QueueSetEndTimeEvent $event,
-        $eventName,
-        EventDispatcherInterface $dispatcher
-    ) {
+    public function onAddToQueueListenerRun(AddToQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
+    {
         $query = $event->getQuery();
         $this->database->execute($query);
     }
