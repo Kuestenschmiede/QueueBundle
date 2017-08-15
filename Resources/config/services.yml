@@ -66,3 +66,15 @@ services:
             - { name: kernel.event_listener, event: con4gis.queue.setendtime, method: onSetEndTimeListenerRun }
         arguments:
 #            - '@doctrine.orm.default_entity_manager'
+
+
+    # Response
+    con4gis_queue.onQueueResponseListenerRun:
+        class: con4gis\QueueBundle\Classes\Listener\QueueResponseListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.queue.response, method: onQueueResponseListenerLoadContent }
+
+    con4gis_queue.onQueueResponseListenerGenerate:
+        class: con4gis\QueueBundle\Classes\Listener\QueueResponseListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.queue.response, method: onQueueResponseListenerGenerate }

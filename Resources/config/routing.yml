@@ -1,0 +1,6 @@
+con4gis_queue_run:
+    path:     /api/runqueue/{queuename}/{count}
+    defaults: { _controller: con4gisQueueBundle:Queue:runQueue, count: 10 }
+    requirements:
+            count: '\d+'
+    methods:  [GET]

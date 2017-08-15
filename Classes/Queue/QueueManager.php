@@ -13,6 +13,8 @@ namespace con4gis\QueueBundle\Classes\Queue;
 
 use con4gis\QueueBundle\Classes\Events\AddToQueueEvent;
 use con4gis\QueueBundle\Classes\Events\LoadQueueEvent;
+use con4gis\QueueBundle\Classes\Events\QueueEvent;
+use con4gis\QueueBundle\Classes\Events\QueueResponseEvent;
 use con4gis\QueueBundle\Classes\Events\QueueSetEndTimeEvent;
 use con4gis\QueueBundle\Classes\Events\QueueSetStartTimeEvent;
 use Contao\System;
@@ -48,10 +50,10 @@ class QueueManager
 
     /**
      * Speichert ein Event in der Queue für die zeitversetzte Ausführung.
-     * @param $saveEvent
-     * @param $priority
+     * @param QueueEvent $saveEvent
+     * @param int        $priority
      */
-    public function addToQueue($saveEvent, $priority = 1024)
+    public function addToQueue(QueueEvent $saveEvent, $priority = 1024)
     {
         $queueEvent = new AddToQueueEvent();
         $queueEvent->setEvent($saveEvent);
@@ -67,18 +69,18 @@ class QueueManager
      */
     public function run($eventname, $count)
     {
-        $queueEvents = $this->loadQueue($eventname, $count);
+        $queueEvents    = $this->loadQueue($eventname, $count);
+        $rtn            = array();
 
         if ($queueEvents->numRows) {
             while ($queueEvents->next()) {
                 $this->setStartTime($queueEvents->id);
-                $this->dispatch($queueEvents);
+                $rtn[] = $this->dispatch($queueEvents);
                 $this->setEndTime($queueEvents->id);
             }
+        } else {
+            $this->response($eventname, 'noActiveJobs', 'INFO');
         }
-        #@todo Event für das Auslesen der Rückgabe implementieren! Muss individuell erstellt werden!!!
-        #@todo Es muss mehrere Provider für die Rückgabe geben, z.B. Log, Mail, Konsole, HTML!!!
-        #@todo Der aufruf von Außen muss noch erstellt werden!!!
     }
 
 
@@ -88,7 +90,7 @@ class QueueManager
      * @param $count
      * @return \Database\Result
      */
-    public function loadQueue($eventname, $count)
+    protected function loadQueue($eventname, $count)
     {
         $queueEvent = new LoadQueueEvent();
         $queueEvent->setKind($eventname);
@@ -102,7 +104,7 @@ class QueueManager
      * Setzt die Startzeit der Verarbeitung für einen Eintrag der Queue.
      * @param $id
      */
-    public function setStartTime($id)
+    protected function setStartTime($id)
     {
         $queueEvent = new QueueSetStartTimeEvent();
         $queueEvent->setId($id);
@@ -114,7 +116,7 @@ class QueueManager
      * Setzt die Endzeit der Verarbeitung eines Eintrags in der Queue.
      * @param $id
      */
-    public function setEndTime($id)
+    protected function setEndTime($id)
     {
         $queueEvent = new QueueSetEndTimeEvent();
         $queueEvent->setId($id);
@@ -125,11 +127,36 @@ class QueueManager
     /**
      * Ruft die Verarbeitung eines Events der Queue auf.
      * @param $queueEvent
+     * @return array
      */
-    public function dispatch($queueEvent)
+    protected function dispatch($queueEvent)
     {
         $event = urldecode($queueEvent->data);
         $event = unserialize($event);
-        #$this->dispatcher->dispatch($event::NAME, $event);
+        $this->dispatcher->dispatch($event::NAME, $event);
+
+        if ($event->getHasError()) {
+            $this->response($event::NAME, $event->getError(), 'ERROR', $event->getParam());
+        } else {
+            $this->response($event::NAME, $event->getReturnMessages(), 'NOTICE', $event->getParam());
+        }
+    }
+
+
+    /**
+     * Ruft das Event für die Rückgabe auf.
+     * @param        $eventname
+     * @param        $content
+     * @param string $kind
+     * @param array  $param
+     */
+    protected function response($eventname, $content, $kind = 'INFO', $param = array())
+    {
+        $event = new QueueResponseEvent();
+        $event->setQueueName($eventname);
+        $event->setContent($content);
+        $event->setKind($kind);
+        $event->setParam($param);
+        $this->dispatcher->dispatch($event::NAME, $event);
     }
 }
