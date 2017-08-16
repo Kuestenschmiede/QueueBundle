@@ -65,7 +65,7 @@ class QueueResponseListener
         $param['msgKey']    = $msgKey;
         $param['msgType']   = $msgType;
 
-        $notifications = Notification::findAllByType($msgType);
+        $notifications = Notification::findByType($msgType);
 
         if ($notifications !== null) {
             while ($notifications->next()) {
