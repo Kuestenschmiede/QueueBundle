@@ -69,7 +69,7 @@ class QueueResponseListener
 
         if ($notifications !== null) {
             while ($notifications->next()) {
-                $notifications->send($param);
+                $notifications->current()->send($param);
             }
         }
     }

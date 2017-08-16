@@ -305,3 +305,4 @@ $GLOBALS['con4gis']['api']['key']['queue'] = '$6$D.AAHGlxy6$CMTMiG6yfiPrbdTb0ejE
  * Beispiel mit zusätzlichen InsertTag für 'NOTICE':
  * $GLOBALS['con4gis']['queue']['notificationtypes']['MemberLoadEvent'] = array('ERROR', 'INFO', 'NOTICE' => array('neuerTag'));
  */
+$GLOBALS['con4gis']['queue']['notificationtypes']['NameDesEvents'] = array('ERROR', 'INFO', 'NOTICE');
