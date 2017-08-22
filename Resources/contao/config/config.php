@@ -56,6 +56,9 @@
  * have to be set. Take a look at the system/modules/core/config/config.php
  * file to see how back end modules are configured.
  */
+$GLOBALS['BE_MOD']['con4gis_bricks']['queue'] = array(
+    'tables' => array('tl_c4g_queue')
+);
 
 
 /**
@@ -305,4 +308,3 @@ $GLOBALS['con4gis']['api']['key']['queue'] = '$6$D.AAHGlxy6$CMTMiG6yfiPrbdTb0ejE
  * Beispiel mit zusätzlichen InsertTag für 'NOTICE':
  * $GLOBALS['con4gis']['queue']['notificationtypes']['MemberLoadEvent'] = array('ERROR', 'INFO', 'NOTICE' => array('neuerTag'));
  */
-$GLOBALS['con4gis']['queue']['notificationtypes']['NameDesEvents'] = array('ERROR', 'INFO', 'NOTICE');

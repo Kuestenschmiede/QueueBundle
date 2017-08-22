@@ -26,7 +26,13 @@ $GLOBALS['TL_DCA'][$strName] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'enableVersioning'            => true,
+		'enableVersioning'            => false,
+		'closed'                      => true,
+		'notEditable'                 => true,
+		'notDeletable'                => true,
+		'notSortable'                 => true,
+		'notCopyable'                 => true,
+		'notCreatable'                => true,
 		'sql' => array
 		(
 			'keys' => array
@@ -42,27 +48,28 @@ $GLOBALS['TL_DCA'][$strName] = array
 		'sorting' => array
 		(
 			'mode'                    => 1,
-			'fields'                  => array('kind'),
-            'panelLayout'             => 'sort,filter;search,limit',
-			'flag'                    => 1
+			'fields'                  => array('tstamp', 'priority'),
+            'panelLayout'             => 'filter,limit',
+			'flag'                    => 6
 		),
 		'label' => array
 		(
-			'fields'                  => array('kind'),
-			'format'                  => '%s'
+			'fields'                  => array('kind', 'startworking', 'endworking'),
+			'format'                  => '%s [Start: %s - Ende: %s]',
+            'label_callback'          => array('\con4gis\QueueBundle\Classes\Contao\Callbacks\TlC4gQueue', 'cbGenJobLabel')
 		),
 		'global_operations' => array
-		(
+		(/*
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
 				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
-			)
+			)*/
 		),
 		'operations' => array
-		(
+		(/*
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG'][$strName]['edit'],
@@ -81,13 +88,20 @@ $GLOBALS['TL_DCA'][$strName] = array
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
-			),
+			),*/
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG'][$strName]['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
-			)
+			),
+            'check' => array
+            (
+                'label'               => &$GLOBALS['TL_LANG'][$strName]['check'],
+                #'href'                => 'act=show',
+                'icon'                => 'web/bundles/edenmember/status.png',
+                'button_callback'     => array('\con4gis\QueueBundle\Classes\Contao\Callbacks\TlC4gQueue', 'cbGenCheckButton')
+            )
 		)
 	),
 
@@ -107,7 +121,7 @@ $GLOBALS['TL_DCA'][$strName] = array
 	'palettes' => array
 	(
 		'__selector__'                => array(''),
-		'default'                     => '{data_legend},kind,priority,startworking,endworking,data;'
+		'default'                     => '{data_legend},kind,priority,startworking,endworking,haserror;'
 	),
 
 	// Subpalettes
@@ -125,12 +139,14 @@ $GLOBALS['TL_DCA'][$strName] = array
 		),
 		'tstamp' => array
 		(
+		    'flag'                    => 6,
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
         'kind' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['kind'],
             'exclude'                 => true,
+            'filter'                  => true,
             'inputType'               => 'text',
             'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
             'sql'                     => "varchar(255) NOT NULL default ''"
@@ -139,6 +155,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['priority'],
             'exclude'                 => true,
+            'filter'                  => true,
             'inputType'               => 'text',
             'default'                 => 1024,
             'eval'                    => array('mandatory'=>true, 'maxlength'=>10),
@@ -148,6 +165,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['startworking'],
             'exclude'                 => true,
+            'flag'                    => 6,
             'inputType'               => 'text',
             'eval'                    => array('maxlength'=>10),
             'sql'                     => "int(10) NOT NULL default '0'"
@@ -156,16 +174,26 @@ $GLOBALS['TL_DCA'][$strName] = array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['endworking'],
             'exclude'                 => true,
+            'flag'                    => 6,
             'inputType'               => 'text',
             'eval'                    => array('maxlength'=>10),
             'sql'                     => "int(10) NOT NULL default '0'"
+        ),
+        'haserror' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG'][$strName]['haserror'],
+            'exclude'                 => true,
+            'filter'                  => true,
+            'inputType'               => 'checkbox',
+            //'eval'                    => array(),
+            'sql'                     => "char(1) NOT NULL default ''"
         ),
         'data' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['data'],
             'exclude'                 => true,
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>255),
+            'eval'                    => array('maxlength'=>255, 'doNotShow'=>true),
             'sql'                     => "text NOT NULL"
         )
 	)

@@ -21,9 +21,9 @@
  *
  *
  * @package     eden
- * @filesource  default.php.php
+ * @filesource  modules.php
  * @version     1.0.0
- * @since       15.08.17 - 11:38
+ * @since       22.08.17 - 15:01
  * @author      Patrick Froch <info@easySolutionsIT.de>
  * @link        http://easySolutionsIT.de
  * @copyright   e@sy Solutions IT 2017
@@ -31,18 +31,12 @@
  */
 
 /**
- * Miscellaneous
+ * Back end modules
  */
-$GLOBALS['TL_LANG']['MSC']['con4gis']['queueoutput'] = 'Ausführen von %s Jobs der Queue [%s] Rückmeldungen werden nach Beendigung der Verarbeitung über das NotificationCenter versendet.';
-$GLOBALS['TL_LANG']['MSC']['con4gis']['queuestatus']['running'] = 'Abarbeitung läuft';
-$GLOBALS['TL_LANG']['MSC']['con4gis']['queuestatus']['waiting'] = 'Wartet auf Abarbeitung';
-$GLOBALS['TL_LANG']['MSC']['con4gis']['queuestatus']['success'] = 'Abarbeitung erfolgreich';
-$GLOBALS['TL_LANG']['MSC']['con4gis']['queuestatus']['error']   = 'Bei der Abarbeitung ist ein Fehler aufgetreten';
-
+$GLOBALS['TL_LANG']['MOD']['queue']     = array('Queue', 'Queue');
 
 
 /**
- * Content Elemente
+ * Front end modules
  */
-//$GLOBALS['TL_LANG']['CTE']['']    = '';           // Kategorie
-//$GLOBALS['TL_LANG']['CTE']['']    = array('');    // Inhaltselement
+//$GLOBALS['TL_LANG']['FMD'][''] = array('', '');
