@@ -85,7 +85,7 @@ class TlC4gQueue
                 // Überprüfung mit Fehlern abgeschlossen
                 $temp   = $event->getReturnMessages();
                 $content= (is_array($temp) && count($temp)) ? implode('<br>', $temp) : $temp;
-                $icon   = str_replace('.png', '-busy.png', $icon);
+                $icon   = str_replace('-away.png', '-busy.png', $icon);
                 $icon   = Image::getHtml($icon, $label);
                 $content= '<div style=\\\'min-height: 300px; margin: 5px;\\\'>' . $content . '</div>';
                 $js     = 'onclick="Backend.openModalWindow(500, \'';
@@ -95,6 +95,10 @@ class TlC4gQueue
                 $link  .= $icon . '</span>';
                 return $link;
             }
+        }
+
+        if ($row['endworking']) {
+            $icon   = str_replace('-away.png', '.png', $icon);
         }
 
         // Überprüfung ohne Fehler abgeschlossen

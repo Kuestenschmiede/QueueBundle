@@ -99,7 +99,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             (
                 'label'               => &$GLOBALS['TL_LANG'][$strName]['check'],
                 #'href'                => 'act=show',
-                'icon'                => 'web/bundles/edenmember/status.png',
+                'icon'                => 'web/bundles/con4gisqueue/status-away.png',
                 'button_callback'     => array('\con4gis\QueueBundle\Classes\Contao\Callbacks\TlC4gQueue', 'cbGenCheckButton')
             )
 		)
