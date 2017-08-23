@@ -103,11 +103,11 @@ abstract class QueueEvent extends Event
 
 
     /**
-     * @param string $returnMessage
+     * @param array $returnMessage
      */
-    public function addReturnMessage(string $returnMessage)
+    public function addReturnMessage(array $returnMessage)
     {
-        $this->returnMessages[] = $returnMessage;
+        $this->returnMessages = array_merge($this->returnMessages,$returnMessage);
     }
 
 
