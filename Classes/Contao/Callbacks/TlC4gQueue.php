@@ -1,13 +1,11 @@
 <?php
 /**
- * @package     eden
- * @filesource  TlC4gQueue.php
- * @version     1.0.0
- * @since       22.08.17 - 15:37
- * @author      Patrick Froch <info@easySolutionsIT.de>
- * @link        http://easySolutionsIT.de
- * @copyright   e@sy Solutions IT 2017
- * @license     EULA
+ * con4gis
+ * @version   php 7
+ * @package   con4gis
+ * @author    con4gis authors (see "authors.txt")
+ * @copyright Küstenschmiede GmbH Software & Design 2017
+ * @link      https://www.kuestenschmiede.de
  */
 namespace con4gis\QueueBundle\Classes\Contao\Callbacks;
 

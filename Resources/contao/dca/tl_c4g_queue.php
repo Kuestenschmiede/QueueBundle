@@ -2,7 +2,7 @@
 /**
  * con4gis - the gis-kit
  *
- * @version   php 5
+ * @version   php 7
  * @package   con4gis
  * @author    con4gis contributors (see "authors.txt")
  * @license   GNU/LGPL http://opensource.org/licenses/lgpl-3.0.html
@@ -145,6 +145,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'kind' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['kind'],
+            'default'                 => '',
             'exclude'                 => true,
             'filter'                  => true,
             'inputType'               => 'text',
@@ -164,6 +165,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'startworking' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['startworking'],
+            'default'                 => '',
             'exclude'                 => true,
             'flag'                    => 6,
             'inputType'               => 'text',
@@ -173,6 +175,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'endworking' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['endworking'],
+            'default'                 => '0',
             'exclude'                 => true,
             'flag'                    => 6,
             'inputType'               => 'text',
@@ -182,6 +185,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'haserror' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['haserror'],
+            'default'                 => '',
             'exclude'                 => true,
             'filter'                  => true,
             'inputType'               => 'checkbox',
@@ -191,6 +195,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'data' => array
         (
             'label'                   => &$GLOBALS['TL_LANG'][$strName]['data'],
+            'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
             'eval'                    => array('maxlength'=>255, 'doNotShow'=>true),
