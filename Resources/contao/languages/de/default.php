@@ -10,7 +10,7 @@
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['con4gis']['queueoutput'] = 'Ausführen von %s Jobs der Queue [%s] Rückmeldungen werden nach Beendigung der Verarbeitung über das NotificationCenter versendet.';
+$GLOBALS['TL_LANG']['MSC']['con4gis']['queueoutput']            = 'Ausführen von %s Jobs der Queue [%s] Rückmeldungen werden nach Beendigung der Verarbeitung über das NotificationCenter versendet.';
 $GLOBALS['TL_LANG']['MSC']['con4gis']['queuestatus']['running'] = 'Abarbeitung läuft';
 $GLOBALS['TL_LANG']['MSC']['con4gis']['queuestatus']['waiting'] = 'Wartet auf Abarbeitung';
 $GLOBALS['TL_LANG']['MSC']['con4gis']['queuestatus']['success'] = 'Abarbeitung erfolgreich';

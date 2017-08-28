@@ -67,6 +67,16 @@ abstract class QueueEvent extends Event
 
 
     /**
+     * @param mixed $error
+     */
+    public function addError($error)
+    {
+        $error          = (is_array($error)) ? $error : array($error);
+        $this->error    = array_merge($this->error, $error);
+    }
+
+
+    /**
      * @return bool
      */
     public function getHasError(): bool
@@ -103,11 +113,12 @@ abstract class QueueEvent extends Event
 
 
     /**
-     * @param array $returnMessage
+     * @param mixed $returnMessage
      */
-    public function addReturnMessage(array $returnMessage)
+    public function addReturnMessage($returnMessage)
     {
-        $this->returnMessages = array_merge($this->returnMessages,$returnMessage);
+        $returnMessage          = (is_array($returnMessage)) ? $returnMessage : array($returnMessage);
+        $this->returnMessages   = array_merge($this->returnMessages,$returnMessage);
     }
 
 

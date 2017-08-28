@@ -2,7 +2,7 @@
 /**
  * con4gis - the gis-kit
  *
- * @version   php 7
+ * @version   php 5
  * @package   con4gis
  * @author    con4gis contributors (see "authors.txt")
  * @license   GNU/LGPL http://opensource.org/licenses/lgpl-3.0.html
@@ -11,15 +11,15 @@
  */
 namespace con4gis\QueueBundle\Classes\Listener;
 
-use con4gis\QueueBundle\Classes\Events\QueueSetStartTimeEvent;
+use con4gis\QueueBundle\Classes\Events\QueueSetErrorEvent;
 use Contao\Database;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class QueueSetStartTimeListener
+ * Class QueueSetErrorListener
  * @package con4gis\QueueBundle\Classes\Listener
  */
-class QueueSetStartTimeListener
+class QueueSetErrorListener
 {
 
 
@@ -45,32 +45,32 @@ class QueueSetStartTimeListener
 
 
     /**
-     * Erstellt die Abfrage für das Einfügen des Startdatums in die Queue-Tabelle.
-     * @param QueueSetStartTimeEvent   $event
+     * Erstellt die Abfrage für das Einfügen eines Fehlers in die Queue-Tabelle.
+     * @param QueueSetErrorEvent       $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
      */
-    public function onSetStartTimeListenerQuery(
-        QueueSetStartTimeEvent $event,
+    public function onSetErrorListenerQuery(
+        QueueSetErrorEvent $event,
         $eventName,
         EventDispatcherInterface $dispatcher
     ) {
         $table          = $event->getQueueTable();
         $field          = $event->getField();
         $id             = $event->getId();
-        $query          = "UPDATE $table SET $field = " . time() . " WHERE id = $id";
+        $query          = "UPDATE $table SET $field = 1 WHERE id = $id";
         $event->setQuery($query);
     }
 
 
     /**
      * Führt die Abfrage aus.
-     * @param QueueSetStartTimeEvent   $event
+     * @param QueueSetErrorEvent       $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
      */
-    public function onSetStartTimeListenerRun(
-        QueueSetStartTimeEvent $event,
+    public function onSetErrorListenerRun(
+        QueueSetErrorEvent $event,
         $eventName,
         EventDispatcherInterface $dispatcher
     ) {

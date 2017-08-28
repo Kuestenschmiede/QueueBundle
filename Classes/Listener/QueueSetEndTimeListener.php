@@ -45,7 +45,7 @@ class QueueSetEndTimeListener
 
 
     /**
-     * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
+     * Erstellt die Abfrage für das Einfügen des Enddatums in die Queue-Tabelle.
      * @param QueueSetEndTimeEvent     $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
@@ -64,7 +64,7 @@ class QueueSetEndTimeListener
 
 
     /**
-     * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
+     * Führt die Abfrage aus.
      * @param QueueSetEndTimeEvent     $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
