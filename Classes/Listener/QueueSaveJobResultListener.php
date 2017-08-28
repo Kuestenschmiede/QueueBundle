@@ -11,15 +11,16 @@
  */
 namespace con4gis\QueueBundle\Classes\Listener;
 
-use con4gis\QueueBundle\Classes\Events\QueueSetEndTimeEvent;
+use con4gis\QueueBundle\Classes\Events\QueueSaveJobResultEvent;
+use con4gis\QueueBundle\Classes\Events\QueueSetErrorEvent;
 use Contao\Database;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class QueueSetEndTimeListener
+ * Class QueueSaveJobResultListener
  * @package con4gis\QueueBundle\Classes\Listener
  */
-class QueueSetEndTimeListener
+class QueueSaveJobResultListener
 {
 
 
@@ -45,32 +46,33 @@ class QueueSetEndTimeListener
 
 
     /**
-     * Erstellt die Abfrage für das Einfügen des Enddatums in die Queue-Tabelle.
-     * @param QueueSetEndTimeEvent     $event
+     * Erstellt die Abfrage für das Einfügen eines Fehlers in die Queue-Tabelle.
+     * @param QueueSaveJobResultEvent  $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
      */
-    public function onSetEndTimeListenerQuery(
-        QueueSetEndTimeEvent $event,
+    public function onSaveJobResultQuery(
+        QueueSaveJobResultEvent $event,
         $eventName,
         EventDispatcherInterface $dispatcher
     ) {
         $table          = $event->getQueueTable();
         $field          = $event->getField();
+        $data           = urlencode(serialize($event->getData()));
         $id             = $event->getId();
-        $query          = "UPDATE $table SET $field = " . time() . " WHERE id = $id";
+        $query          = "UPDATE $table SET $field = '$data' WHERE id = $id";
         $event->setQuery($query);
     }
 
 
     /**
      * Führt die Abfrage aus.
-     * @param QueueSetEndTimeEvent     $event
+     * @param QueueSaveJobResultEvent  $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
      */
-    public function onSetEndTimeListenerRun(
-        QueueSetEndTimeEvent $event,
+    public function onSaveJobResultRun(
+        QueueSaveJobResultEvent $event,
         $eventName,
         EventDispatcherInterface $dispatcher
     ) {

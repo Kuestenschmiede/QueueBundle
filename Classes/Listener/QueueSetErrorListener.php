@@ -11,15 +11,15 @@
  */
 namespace con4gis\QueueBundle\Classes\Listener;
 
-use con4gis\QueueBundle\Classes\Events\QueueSetEndTimeEvent;
+use con4gis\QueueBundle\Classes\Events\QueueSetErrorEvent;
 use Contao\Database;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class QueueSetEndTimeListener
+ * Class QueueSetErrorListener
  * @package con4gis\QueueBundle\Classes\Listener
  */
-class QueueSetEndTimeListener
+class QueueSetErrorListener
 {
 
 
@@ -45,32 +45,32 @@ class QueueSetEndTimeListener
 
 
     /**
-     * Erstellt die Abfrage für das Einfügen des Enddatums in die Queue-Tabelle.
-     * @param QueueSetEndTimeEvent     $event
+     * Erstellt die Abfrage für das Einfügen eines Fehlers in die Queue-Tabelle.
+     * @param QueueSetErrorEvent       $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
      */
-    public function onSetEndTimeListenerQuery(
-        QueueSetEndTimeEvent $event,
+    public function onSetErrorListenerQuery(
+        QueueSetErrorEvent $event,
         $eventName,
         EventDispatcherInterface $dispatcher
     ) {
         $table          = $event->getQueueTable();
         $field          = $event->getField();
         $id             = $event->getId();
-        $query          = "UPDATE $table SET $field = " . time() . " WHERE id = $id";
+        $query          = "UPDATE $table SET $field = 1 WHERE id = $id";
         $event->setQuery($query);
     }
 
 
     /**
      * Führt die Abfrage aus.
-     * @param QueueSetEndTimeEvent     $event
+     * @param QueueSetErrorEvent       $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
      */
-    public function onSetEndTimeListenerRun(
-        QueueSetEndTimeEvent $event,
+    public function onSetErrorListenerRun(
+        QueueSetErrorEvent $event,
         $eventName,
         EventDispatcherInterface $dispatcher
     ) {

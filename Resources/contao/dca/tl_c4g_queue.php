@@ -55,7 +55,7 @@ $GLOBALS['TL_DCA'][$strName] = array
 		'label' => array
 		(
 			'fields'                  => array('kind', 'startworking', 'endworking'),
-			'format'                  => '%s [Start: %s - Ende: %s]',
+			'format'                  => '%s [Start: %s | Ende: %s]',
             'label_callback'          => array('\con4gis\QueueBundle\Classes\Contao\Callbacks\TlC4gQueue', 'cbGenJobLabel')
 		),
 		'global_operations' => array

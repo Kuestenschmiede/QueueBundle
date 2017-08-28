@@ -45,7 +45,7 @@ class QueueSetStartTimeListener
 
 
     /**
-     * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
+     * Erstellt die Abfrage für das Einfügen des Startdatums in die Queue-Tabelle.
      * @param QueueSetStartTimeEvent   $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
@@ -64,7 +64,7 @@ class QueueSetStartTimeListener
 
 
     /**
-     * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
+     * Führt die Abfrage aus.
      * @param QueueSetStartTimeEvent   $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher

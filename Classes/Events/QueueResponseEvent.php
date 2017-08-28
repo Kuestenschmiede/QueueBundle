@@ -94,7 +94,7 @@ class QueueResponseEvent extends Event
     public function setKind(string $kind)
     {
         $kind = strtoupper($kind);
-        
+
         if (in_array($kind, self::LEVEL)) {
             $this->kind = $kind;
         } else {
@@ -113,10 +113,14 @@ class QueueResponseEvent extends Event
 
 
     /**
-     * @param string $content
+     * @param mixed $content
      */
-    public function setContent(string $content)
+    public function setContent($content)
     {
+        if (is_array($content)) {
+            $content = implode("\n", $content);
+        }
+
         $this->content = $content;
     }
 

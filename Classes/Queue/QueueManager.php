@@ -15,7 +15,9 @@ use con4gis\QueueBundle\Classes\Events\AddToQueueEvent;
 use con4gis\QueueBundle\Classes\Events\LoadQueueEvent;
 use con4gis\QueueBundle\Classes\Events\QueueEvent;
 use con4gis\QueueBundle\Classes\Events\QueueResponseEvent;
+use con4gis\QueueBundle\Classes\Events\QueueSaveJobResultEvent;
 use con4gis\QueueBundle\Classes\Events\QueueSetEndTimeEvent;
+use con4gis\QueueBundle\Classes\Events\QueueSetErrorEvent;
 use con4gis\QueueBundle\Classes\Events\QueueSetStartTimeEvent;
 use Contao\System;
 
@@ -69,14 +71,14 @@ class QueueManager
      */
     public function run($eventname, $count)
     {
-        $queueEvents    = $this->loadQueue($eventname, $count);
-        $rtn            = array();
+        $queueEvents = $this->loadQueue($eventname, $count);
 
         if ($queueEvents->numRows) {
             while ($queueEvents->next()) {
                 $this->setStartTime($queueEvents->id);
-                $rtn[] = $this->dispatch($queueEvents);
+                $jobEvent = $this->dispatch($queueEvents);
                 $this->setEndTime($queueEvents->id);
+                $this->saveJobResult($queueEvents->id, $jobEvent);
             }
         } else {
             $this->response($eventname, 'noActiveJobs', 'INFO');
@@ -125,6 +127,33 @@ class QueueManager
 
 
     /**
+     * Setzt die Endzeit der Verarbeitung eines Eintrags in der Queue.
+     * @param $id
+     */
+    protected function setError($id)
+    {
+        $queueEvent = new QueueSetErrorEvent();
+        $queueEvent->setId($id);
+        $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
+    }
+
+
+    /**
+     * Speichernt das verarbeitete Event in der Queue, damit die Fehlermeldungen erhalten bleiben.
+     * @param $id
+     * @param $jobEvent
+     */
+    protected function saveJobResult($id, $jobEvent)
+    {
+        $queueEvent = new QueueSaveJobResultEvent();
+        $queueEvent->setId($id);
+        $queueEvent->setData($jobEvent);
+
+        $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
+    }
+
+
+    /**
      * Ruft die Verarbeitung eines Events der Queue auf.
      * @param $queueEvent
      * @return array
@@ -133,12 +162,17 @@ class QueueManager
     {
         $event = urldecode($queueEvent->data);
         $event = unserialize($event);
-        $this->dispatcher->dispatch($event::NAME, $event);
 
-        if ($event->getHasError()) {
-            $this->response($event::NAME, $event->getError(), 'ERROR', $event->getParam());
-        } else {
-            $this->response($event::NAME, $event->getReturnMessages(), 'NOTICE', $event->getParam());
+        if ($event) {
+            $this->dispatcher->dispatch($event::NAME, $event);
+            if ($event->getHasError()) {
+                $this->setError($queueEvent->id);
+                $this->response($event::NAME, $event->getError(), 'ERROR', $event->getParam());
+            } else {
+                $this->response($event::NAME, $event->getReturnMessages(), 'NOTICE', $event->getParam());
+            }
+
+            return $event;
         }
     }
 
