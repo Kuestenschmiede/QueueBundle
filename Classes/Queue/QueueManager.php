@@ -145,11 +145,12 @@ class QueueManager
      */
     protected function saveJobResult($id, $jobEvent)
     {
-        $queueEvent = new QueueSaveJobResultEvent();
-        $queueEvent->setId($id);
-        $queueEvent->setData($jobEvent);
-
-        $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
+        if ($jobEvent) {
+            $queueEvent = new QueueSaveJobResultEvent();
+            $queueEvent->setId($id);
+            $queueEvent->setData($jobEvent);
+            $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
+        }
     }
 
 
