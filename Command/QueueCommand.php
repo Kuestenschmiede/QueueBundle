@@ -40,12 +40,8 @@ class QueueCommand extends ContainerAwareCommand
         $queueName      = $input->getArgument('jobname');
         $queueCount     = $input->getArgument('jobcount');
         $queueManeger   = new QueueManager();
-
-        ob_start();
         $queueManeger->run($queueName, $queueCount);
-        $content = ob_get_contents();
-        ob_end_clean();
-
+        $content        = $queueManeger->getContent();
         $output->writeln($content);
 
         return 0;
