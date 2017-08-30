@@ -164,6 +164,7 @@ class QueueManager
 
         if ($event) {
             $this->dispatcher->dispatch($event::NAME, $event);
+
             if ($event->getHasError()) {
                 $this->setError($queueEvent->id);
                 $this->response($event::NAME, $event->getError(), 'ERROR', $event->getParam());
@@ -191,5 +192,9 @@ class QueueManager
         $event->setKind($kind);
         $event->setParam($param);
         $this->dispatcher->dispatch($event::NAME, $event);
+
+        if (php_sapi_name() == 'cli') {
+            echo $content;
+        }
     }
 }
