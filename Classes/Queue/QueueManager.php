@@ -196,7 +196,7 @@ class QueueManager
         $this->dispatcher->dispatch($event::NAME, $event);
 
         if (php_sapi_name() == 'cli') {
-            echo $content;
+            echo trim(implode("\n", $content));
         }
     }
 }
