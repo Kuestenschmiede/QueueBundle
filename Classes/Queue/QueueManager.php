@@ -33,7 +33,14 @@ class QueueManager
      * Instanz des EventDispatchers
      * @var null|object
      */
-    public $dispatcher = null;
+    protected $dispatcher = null;
+
+
+    /**
+     * Rückmeldung der Queue
+     * @var string
+     */
+    protected $content = '';
 
 
     /**
@@ -47,6 +54,25 @@ class QueueManager
         } else {
             $this->dispatcher = System::getContainer()->get('event_dispatcher');
         }
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+
+    /**
+     * @param $content
+     */
+    public function setContent($content)
+    {
+        $content        = (is_array($content) && count($content)) ? trim(implode("\n", $content)) : $content;
+        $this->content  = $content;
     }
 
 
@@ -188,15 +214,13 @@ class QueueManager
      */
     protected function response($eventname, $content, $kind = 'INFO', $param = array())
     {
+        $this->setContent($content);
+
         $event = new QueueResponseEvent();
         $event->setQueueName($eventname);
         $event->setContent($content);
         $event->setKind($kind);
         $event->setParam($param);
         $this->dispatcher->dispatch($event::NAME, $event);
-
-        if (php_sapi_name() == 'cli') {
-            echo trim(implode("\n", $content));
-        }
     }
 }
