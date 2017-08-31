@@ -10,9 +10,11 @@
 namespace con4gis\QueueBundle\Classes\Contao\Callbacks;
 
 use Contao\Image;
-use Eden\MemberBundle\classes\events\CheckContingentEvent;
-use Eden\MemberBundle\classes\listener\VerifyPostalListener;
 
+/**
+ * Class TlC4gQueue
+ * @package con4gis\QueueBundle\Classes\Contao\Callbacks
+ */
 class TlC4gQueue
 {
 
@@ -87,13 +89,13 @@ class TlC4gQueue
                 $icon   = str_replace('-away.png', '-busy.png', $icon);
                 $icon   = Image::getHtml($icon, $label);
                 $content= str_replace('"', '', $content);
+                $content= str_replace("\n", '<br>', $content);
                 $content= '<div style=\\\'min-height: 300px; margin: 5px;\\\'>' . $content . '</div>';
                 $js     = 'onclick="Backend.openModalWindow(500, \'';
                 $js    .= $GLOBALS['TL_LANG']['MSC']['con4gis']['queuestatus']['error']. '\', \'' . $content . '\')"';
                 $link   = '<span style="cursor: pointer;"';
                 $link  .= $js . '>';
                 $link  .= $icon . '</span>';
-                #$link   = str_replace("'", "\'", $link);
                 return $link;
             }
         }

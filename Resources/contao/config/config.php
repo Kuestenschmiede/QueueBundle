@@ -258,6 +258,7 @@ array_insert($GLOBALS['BE_MOD']['con4gis_bricks'],8, array(
  * event. For more information see https://contao.org/manual.html.
  */
 $GLOBALS['TL_HOOKS']['initializeSystem'][] = array('\con4gis\QueueBundle\Classes\Notification\NotificationManager', 'registerNotificationTyps');
+$GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('\con4gis\QueueBundle\Classes\Contao\Hooks\RightsManager', 'setDeleteRightForAdmin');
 
 
 /**
@@ -278,6 +279,12 @@ $GLOBALS['TL_HOOKS']['initializeSystem'][] = array('\con4gis\QueueBundle\Classes
  * API-KEY für die Ausführung der Queue-Verarbeitung
  */
 $GLOBALS['con4gis']['api']['key']['queue'] = '$6$D.AAHGlxy6$CMTMiG6yfiPrbdTb0ejEhT1vsPUl1Z7x1nxRbaC9LqdnDw4naVIVz19F7d6XEX1.GaCMlwOPmERa6ws6RbAGa0';
+
+
+/**
+ * Tabellen, in denen die Datensätze nur von einem Amin gellöscht werden dürfen
+ */
+$GLOBALS['con4gis']['rightsManagement']['undeletebleTabels'][] = 'tl_c4g_queue';
 
 
 /**

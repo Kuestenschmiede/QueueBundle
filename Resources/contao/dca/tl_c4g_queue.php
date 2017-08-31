@@ -28,8 +28,8 @@ $GLOBALS['TL_DCA'][$strName] = array
 		'dataContainer'               => 'Table',
 		'enableVersioning'            => false,
 		'closed'                      => true,
-		'notEditable'                 => true,
 		'notDeletable'                => true,
+		'notEditable'                 => true,
 		'notSortable'                 => true,
 		'notCopyable'                 => true,
 		'notCreatable'                => true,
@@ -81,14 +81,14 @@ $GLOBALS['TL_DCA'][$strName] = array
 				'label'               => &$GLOBALS['TL_LANG'][$strName]['copy'],
 				'href'                => 'act=copy',
 				'icon'                => 'copy.gif'
-			),
+			),*/
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG'][$strName]['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
-			),*/
+			),
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG'][$strName]['show'],
@@ -98,7 +98,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'check' => array
             (
                 'label'               => &$GLOBALS['TL_LANG'][$strName]['check'],
-                #'href'                => 'act=show',
                 'icon'                => 'web/bundles/con4gisqueue/status-away.png',
                 'button_callback'     => array('\con4gis\QueueBundle\Classes\Contao\Callbacks\TlC4gQueue', 'cbGenCheckButton')
             )
