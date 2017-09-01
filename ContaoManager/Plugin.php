@@ -1,6 +1,6 @@
 <?php
 
-namespace eden\AreaBundle\ContaoManager;
+namespace con4gis\QueueBundle\ContaoManager;
 
 use con4gis\ApiBundle\Con4gisApiBundle;
 use con4gis\QueueBundle\con4gisQueueBundle;
