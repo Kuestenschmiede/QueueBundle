@@ -39,7 +39,6 @@ class Plugin implements RoutingPluginInterface, BundlePluginInterface
         return [
             BundleConfig::create(con4gisQueueBundle::class)
                 ->setLoadAfter([con4gisCoreBundle::class])
-                ->setReplace(['Queue']),
         ];
     }
 }
