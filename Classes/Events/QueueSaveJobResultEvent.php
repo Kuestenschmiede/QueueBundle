@@ -1,10 +1,10 @@
 <?php
 /**
  * con4gis
- * @version   php 7
+ * @version   2.0.0
  * @package   con4gis
  * @author    con4gis authors (see "authors.txt")
- * @copyright Küstenschmiede GmbH Software & Design 2017
+ * @copyright Küstenschmiede GmbH Software & Design 2016 - 2017.
  * @link      https://www.kuestenschmiede.de
  */
 namespace con4gis\QueueBundle\Classes\Events;
@@ -12,17 +12,17 @@ namespace con4gis\QueueBundle\Classes\Events;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class QueueSetStartTimeEvent
+ * Class QueueSaveJobResultEvent
  * @package con4gis\QueueBundle\Classes\Events
  */
-class QueueSetStartTimeEvent extends Event
+class QueueSaveJobResultEvent extends Event
 {
 
 
     /**
      * Name des Events
      */
-    const NAME = 'con4gis.queue.setstarttime';
+    const NAME = 'con4gis.queue.savejobresult';
 
 
     /**
@@ -36,7 +36,7 @@ class QueueSetStartTimeEvent extends Event
      * Name des Felds in welches die Startzeit eingtragen werden soll.
      * @var string
      */
-    protected $field = 'startworking';
+    protected $field = 'data';
 
 
     /**
@@ -47,7 +47,13 @@ class QueueSetStartTimeEvent extends Event
 
 
     /**
-     * Query für das Eintragen der Startzeit.
+     * @var null
+     */
+    protected $data = null;
+
+
+    /**
+     * Query für das Eintragen der Endzeit.
      * @var string
      */
     protected $query = '';
@@ -104,6 +110,24 @@ class QueueSetStartTimeEvent extends Event
     public function setId(int $id)
     {
         $this->id = $id;
+    }
+
+
+    /**
+     * @return null
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+
+    /**
+     * @param null $data
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
     }
 
 

@@ -2,7 +2,7 @@
 /**
  * con4gis - the gis-kit
  *
- * @version   php 5
+ * @version   php 7
  * @package   con4gis
  * @author    con4gis contributors (see "authors.txt")
  * @license   GNU/LGPL http://opensource.org/licenses/lgpl-3.0.html
@@ -17,4 +17,4 @@ $strBundle = 'con4gis/QueueBundle';
 /**
  * Register the templates
  */
-\con4gis\CoreBundle\Classes\Helper\AutoloadHelper::loadTemplates("/src/$strBundle/");
+//\con4gis\CoreBundle\Classes\Helper\AutoloadHelper::loadTemplates("/src/$strBundle/");

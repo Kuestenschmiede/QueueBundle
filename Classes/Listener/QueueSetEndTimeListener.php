@@ -2,22 +2,22 @@
 /**
  * con4gis - the gis-kit
  *
- * @version   php 5
+ * @version   php 7
  * @package   con4gis
  * @author    con4gis contributors (see "authors.txt")
  * @license   GNU/LGPL http://opensource.org/licenses/lgpl-3.0.html
  * @copyright Küstenschmiede GmbH Software & Design 2011 - 2017.
  * @link      https://www.kuestenschmiede.de
  */
-namespace con4gis\Queue\Classes\Listener;
+namespace con4gis\QueueBundle\Classes\Listener;
 
-use con4gis\Queue\Classes\Events\QueueSetEndTimeEvent;
+use con4gis\QueueBundle\Classes\Events\QueueSetEndTimeEvent;
 use Contao\Database;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class QueueSetEndTimeListener
- * @package con4gis\Queue\Classes\Listener
+ * @package con4gis\QueueBundle\Classes\Listener
  */
 class QueueSetEndTimeListener
 {
@@ -45,7 +45,7 @@ class QueueSetEndTimeListener
 
 
     /**
-     * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
+     * Erstellt die Abfrage für das Einfügen des Enddatums in die Queue-Tabelle.
      * @param QueueSetEndTimeEvent     $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
@@ -64,7 +64,7 @@ class QueueSetEndTimeListener
 
 
     /**
-     * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
+     * Führt die Abfrage aus.
      * @param QueueSetEndTimeEvent     $event
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher

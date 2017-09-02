@@ -1,29 +1,28 @@
 <?php
 /**
  * con4gis
- * @version   php 7
+ * @version   2.0.0
  * @package   con4gis
  * @author    con4gis authors (see "authors.txt")
- * @copyright Küstenschmiede GmbH Software & Design 2017
+ * @copyright Küstenschmiede GmbH Software & Design 2016 - 2017.
  * @link      https://www.kuestenschmiede.de
  */
 namespace con4gis\QueueBundle\Classes\Events;
 
-use Database\Result;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class LoadQueueEvent
+ * Class QueueSetErrorEvent
  * @package con4gis\QueueBundle\Classes\Events
  */
-class LoadQueueEvent extends Event
+class QueueSetErrorEvent extends Event
 {
 
 
     /**
      * Name des Events
      */
-    const NAME = 'con4gis.queue.loadqueue';
+    const NAME = 'con4gis.queue.seterror';
 
 
     /**
@@ -34,31 +33,24 @@ class LoadQueueEvent extends Event
 
 
     /**
-     * Anzahl der zuladenen Datensätze.
-     * @var int
+     * Name des Felds in welches die Startzeit eingtragen werden soll.
+     * @var string
      */
-    protected $count = 0;
+    protected $field = 'haserror';
 
 
     /**
      * Name des Events
-     * @var string
+     * @var int
      */
-    protected $kind = '';
+    protected $id = 0;
 
 
     /**
-     * Query für das Einfügen der Daten in die Queue.
+     * Query für das Eintragen der Endzeit.
      * @var string
      */
     protected $query = '';
-
-
-    /**
-     * Events, welche von der Queue geleade wurden.
-     * @var Result
-     */
-    protected $events = null;
 
 
     /**
@@ -82,36 +74,36 @@ class LoadQueueEvent extends Event
     /**
      * @return string
      */
-    public function getKind(): string
+    public function getField(): string
     {
-        return $this->kind;
+        return $this->field;
     }
 
 
     /**
-     * @param string $kind
+     * @param string $field
      */
-    public function setKind(string $kind)
+    public function setField(string $field)
     {
-        $this->kind = $kind;
+        $this->field = $field;
     }
 
 
     /**
      * @return int
      */
-    public function getCount(): int
+    public function getId(): int
     {
-        return $this->count;
+        return $this->id;
     }
 
 
     /**
-     * @param int $count
+     * @param int $id
      */
-    public function setCount(int $count)
+    public function setId(int $id)
     {
-        $this->count = $count;
+        $this->id = $id;
     }
 
 
@@ -130,23 +122,5 @@ class LoadQueueEvent extends Event
     public function setQuery(string $query)
     {
         $this->query = $query;
-    }
-
-
-    /**
-     * @return Result
-     */
-    public function getEvents(): Result
-    {
-        return $this->events;
-    }
-
-
-    /**
-     * @param Result $events
-     */
-    public function setEvents(Result $events)
-    {
-        $this->events = $events;
     }
 }
