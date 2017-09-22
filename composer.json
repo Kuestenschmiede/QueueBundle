@@ -1,15 +1,24 @@
 {
   "name": "con4gis/queue",
   "type": "contao-bundle",
-  "description": "Contao bundle executing jobs through a queue.",
-  "keywords": ["con4gis", "queue", "contao", "c4g", "con4gisqueue", "con4gisqueuebundle", "c4gqueue"],
+  "description": "The batch processing brick of the Contao GIS-kit con4gis.",
+  "keywords": ["con4gis", "queue", "contao", "c4g", "QueueBundle", "con4gisqueuebundle", "c4gqueue"],
   "license": "LGPL-3.0+",
   "authors": [
     {
-      "name": "Kuestenschmiede",
-      "homepage": "https://github.com/kuestenschmiede"
+      "name": "Kuestenschmiede GmbH Software & Design",
+      "homepage": "https://kuestenschmiede.de",
+      "role": "Operator"
+    },
+    {
+      "name": "con4gis community",
+      "homepage": "https://con4gis.org",
+      "role": "Developer"
     }
   ],
+  "support": {
+    "email": "support@con4gis.org"
+  },
   "require": {
     "con4gis/core": "^2.0"
   },
