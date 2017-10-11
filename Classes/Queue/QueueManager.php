@@ -78,12 +78,18 @@ class QueueManager
      * Speichert ein Event in der Queue für die zeitversetzte Ausführung.
      * @param QueueEvent $saveEvent
      * @param int        $priority
+     * @param string     $srcmodule
+     * @param string     $srctable
+     * @param int        $srcid
      */
-    public function addToQueue(QueueEvent $saveEvent, $priority = 1024)
+    public function addToQueue(QueueEvent $saveEvent, $priority = 1024, $srcmodule = '', $srctable = '', $srcid = 0)
     {
         $queueEvent = new AddToQueueEvent();
         $queueEvent->setEvent($saveEvent);
         $queueEvent->setPriority($priority);
+        $queueEvent->setSrcmodule($srcmodule);
+        $queueEvent->setSrctable($srctable);
+        $queueEvent->setSrcid($srcid);
         $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
     }
 

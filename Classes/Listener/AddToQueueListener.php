@@ -50,19 +50,91 @@ class AddToQueueListener
      * @param                          $eventName
      * @param EventDispatcherInterface $dispatcher
      */
+    public function onAddToQueueListenerLoadOldData(AddToQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
+    {
+        $table          = $event->getQueueTable();
+        $srctable       = $event->getSrctable();
+        $srcid          = $event->getSrcid();
+        $query          = "INSERT INTO $table SET ";
+
+        if ($srctable && $srcid) {
+            $loadQuery  = "SELECT * FROM $table WHERE srctable = '$srctable' AND srcid = $srcid";
+            $loadQuery .= " AND startworking = 0 AND endworking = 0";
+            $loadResult = $this->database->execute($loadQuery);
+
+            if ($loadResult->numRows) {
+                $event->setOldData($loadResult);
+            }
+        }
+
+        $event->setQuery($query);
+    }
+
+
+    /**
+     * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
+     * @param AddToQueueEvent          $event
+     * @param                          $eventName
+     * @param EventDispatcherInterface $dispatcher
+     */
+    public function onAddToQueueListenerQueryKind(AddToQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
+    {
+        $table          = $event->getQueueTable();
+        $oldData        = $event->getOldData();
+
+        if ($oldData) {
+            $event->setQuery("UPDATE $table SET ");
+        } else {
+            $event->setQuery("INSERT INTO $table SET ");
+        }
+    }
+
+
+    /**
+     * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
+     * @param AddToQueueEvent          $event
+     * @param                          $eventName
+     * @param EventDispatcherInterface $dispatcher
+     */
     public function onAddToQueueListenerQuery(AddToQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
+        $query          = $event->getQuery();
         $eventToSave    = $event->getEvent();
         $eventToSave    = serialize($eventToSave);
         $eventToSave    = urlencode($eventToSave);  // Ohne urlencode speichert Contao das serialisierte Event nicht!
-        $priotity       = $event->getPriority();
         $kind           = $event->getKind();
-        $table          = $event->getQueueTable();
-        $query          = "INSERT INTO $table SET tstamp = " . time();
+        $priotity       = $event->getPriority();
+        $srcmodule      = $event->getSrcmodule();
+        $srctable       = $event->getSrctable();
+        $srcid          = $event->getSrcid();
+        $query         .= "tstamp = " . time();
         $query         .= ", kind = '$kind'";
         $query         .= ", priority = $priotity";
         $query         .= ", data = '$eventToSave'";
+        $query         .= ", srcmodule = '$srcmodule'";
+        $query         .= ", srcid = $srcid";
+        $query         .= ", srctable = '$srctable'";
         $event->setQuery($query);
+    }
+
+
+    /**
+     * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
+     * @param AddToQueueEvent          $event
+     * @param                          $eventName
+     * @param EventDispatcherInterface $dispatcher
+     */
+    public function onAddToQueueListenerQueryWhere(AddToQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
+    {
+        $oldData        = $event->getOldData();
+        $query          = $event->getQuery();
+        $srctable       = $event->getSrctable();
+        $srcid          = $event->getSrcid();
+
+        if ($oldData) {
+            $query .= " WHERE srctable = '$srctable' AND srcid = $srcid AND startworking = 0 AND endworking = 0";
+            $event->setQuery($query);
+        }
     }
 
 

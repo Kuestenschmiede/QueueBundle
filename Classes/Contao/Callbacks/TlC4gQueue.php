@@ -56,7 +56,23 @@ class TlC4gQueue
             $msg = $GLOBALS['TL_LANG']['MSC']['con4gis']['queuestatus'][$msg];
         }
 
-        return '<span title="' . $msg . '"><img src="' . $icon . '"> ' . $label . '</span>';
+        if (isset($row['srcmodule']) && $row['srcmodule'] != '') {
+            if (isset($GLOBALS['TL_LANG']['MOD'][$row['srcmodule']][0]) &&
+                $GLOBALS['TL_LANG']['MOD'][$row['srcmodule']][0] != ''
+            ) {
+                $srcmodule = $GLOBALS['TL_LANG']['MOD'][$row['srcmodule']][0];
+            } else {
+                $srcmodule = $row['srcmodule'];
+            }
+        } else {
+            $srcmodule = '';
+        }
+
+        if (isset($row['srcid']) && $row['srcid'] != '') {
+            $srcmodule .= ' - ' . $row['srcid'] . ': ';
+        }
+
+        return '<span title="' . $msg . '"><img src="' . $icon . '">' . $srcmodule . $label . '</span>';
     }
 
 

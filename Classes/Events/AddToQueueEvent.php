@@ -54,6 +54,38 @@ class AddToQueueEvent extends Event
 
 
     /**
+     * Moduel des Quelldatensatzes, falls vorhanden.
+     * Wird benötigt, um es in der Liste der Queue im BE anzuzeigen.
+     * @var string
+     */
+    protected $srcmodule = '';
+
+
+    /**
+     * Tabelle des Quelldatensatzes, falls vorhanden.
+     * Wird benötigt, um beim erneuten Speichern den Queuejob zu aktualisieren.
+     * @var string
+     */
+    protected $srctable = '';
+
+
+    /**
+     * Id des Quelldatensatzes, falls vorhanden.
+     * Wird benötigt, um beim erneuten Speichern den Queuejob zu aktualisieren.
+     * @var int
+     */
+    protected $srcid = 0;
+
+
+    /**
+     * Schon vorhandener Datensatz, falls vorhanden.
+     * Wird benötigt, um beim erneuten Speichern den Queuejob zu aktualisieren.
+     * @var null
+     */
+    protected $oldData = null;
+
+
+    /**
      * Query für das Einfügen der Daten in die Queue.
      * @var string
      */
@@ -130,6 +162,78 @@ class AddToQueueEvent extends Event
     {
         $this->event = $event;
         $this->setKind($event::NAME);
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSrcmodule(): string
+    {
+        return $this->srcmodule;
+    }
+
+
+    /**
+     * @param string $srcmodule
+     */
+    public function setSrcmodule(string $srcmodule)
+    {
+        $this->srcmodule = $srcmodule;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSrctable(): string
+    {
+        return $this->srctable;
+    }
+
+
+    /**
+     * @param string $srctable
+     */
+    public function setSrctable(string $srctable)
+    {
+        $this->srctable = $srctable;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getSrcid(): int
+    {
+        return $this->srcid;
+    }
+
+
+    /**
+     * @param int $srcid
+     */
+    public function setSrcid(int $srcid)
+    {
+        $this->srcid = $srcid;
+    }
+
+
+    /**
+     * @return null
+     */
+    public function getOldData()
+    {
+        return $this->oldData;
+    }
+
+
+    /**
+     * @param null $oldData
+     */
+    public function setOldData($oldData)
+    {
+        $this->oldData = $oldData;
     }
 
 

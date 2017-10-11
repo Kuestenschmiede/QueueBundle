@@ -27,6 +27,9 @@ $GLOBALS['TL_LANG'][$strName]['priority']       = array('Priorität', 'Prioritä
 $GLOBALS['TL_LANG'][$strName]['startworking']   = array('Begin der Abarbeitung', 'Begin der Abarbeitung');
 $GLOBALS['TL_LANG'][$strName]['endworking']     = array('Ende der Abarbeitung', 'Ende der Abarbeitung');
 $GLOBALS['TL_LANG'][$strName]['haserror']       = array('Fehler', 'Ist bei der Verarbeitung ein Fehler aufgetreten?');
+$GLOBALS['TL_LANG'][$strName]['srcmodule']      = array('Quellmodul', 'Quellmodul des Jobs');
+$GLOBALS['TL_LANG'][$strName]['srctable']       = array('Quelltabelle', 'Quelltabelle des Jobs');
+$GLOBALS['TL_LANG'][$strName]['srcid']          = array('Quellid', 'Quellid des Jobs');
 
 
 /**
