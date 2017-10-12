@@ -86,6 +86,28 @@ class AddToQueueEvent extends Event
 
 
     /**
+     * Intervall in dem der Job ausgeführt werden soll.
+     * @var string
+     */
+    protected $intervalkind = '';
+
+
+    /**
+     * Anzahl der maximalen Ausführungen
+     * 0 = unendlich
+     * @var int
+     */
+    protected $intervalcount = 1;
+
+
+    /**
+     * Anzhal der noch offen Aufrufe des Jobs bis die maximale Ausführung erreicht ist.
+     * @var int
+     */
+    protected $intervaltorun = 1;
+
+
+    /**
      * Query für das Einfügen der Daten in die Queue.
      * @var string
      */
@@ -234,6 +256,60 @@ class AddToQueueEvent extends Event
     public function setOldData($oldData)
     {
         $this->oldData = $oldData;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getIntervalkind(): string
+    {
+        return $this->intervalkind;
+    }
+
+
+    /**
+     * @param string $intervalkind
+     */
+    public function setIntervalkind(string $intervalkind)
+    {
+        $this->intervalkind = $intervalkind;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getIntervalcount(): int
+    {
+        return $this->intervalcount;
+    }
+
+
+    /**
+     * @param int $intervalcount
+     */
+    public function setIntervalcount(int $intervalcount)
+    {
+        $this->intervalcount = $intervalcount;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getIntervaltorun(): int
+    {
+        return $this->intervaltorun;
+    }
+
+
+    /**
+     * @param int $intervaltorun
+     */
+    public function setIntervaltorun(int $intervaltorun)
+    {
+        $this->intervaltorun = $intervaltorun;
     }
 
 

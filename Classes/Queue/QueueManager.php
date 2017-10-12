@@ -78,18 +78,14 @@ class QueueManager
      * Speichert ein Event in der Queue für die zeitversetzte Ausführung.
      * @param QueueEvent $saveEvent
      * @param int        $priority
-     * @param string     $srcmodule
-     * @param string     $srctable
-     * @param int        $srcid
+     * @param array      $metaData
      */
-    public function addToQueue(QueueEvent $saveEvent, $priority = 1024, $srcmodule = '', $srctable = '', $srcid = 0)
+    public function addToQueue(QueueEvent $saveEvent, $priority = 1024, array $metaData = array())
     {
         $queueEvent = new AddToQueueEvent();
         $queueEvent->setEvent($saveEvent);
         $queueEvent->setPriority($priority);
-        $queueEvent->setSrcmodule($srcmodule);
-        $queueEvent->setSrctable($srctable);
-        $queueEvent->setSrcid($srcid);
+        $this->addMetaData($saveEvent, $metaData);
         $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
     }
 
@@ -227,4 +223,24 @@ class QueueManager
         $event->setParam($param);
         $this->dispatcher->dispatch($event::NAME, $event);
     }
+
+
+    /**
+     * Setzt die Metadaten für die Queue.
+     * @param       $event
+     * @param array $metaData
+     */
+    protected function addMetaData($event, array $metaData)
+    {
+        if (is_array($metaData) && count($metaData)) {
+            foreach ($metaData as $key => $metaDatum) {
+                $method = 'set' . ucfirst($key);
+
+                if (method_exists($event, $method)) {
+                    $event->$method($metaDatum);
+                }
+            }
+        }
+    }
+
 }
