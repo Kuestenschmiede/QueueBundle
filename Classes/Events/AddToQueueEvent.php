@@ -94,10 +94,10 @@ class AddToQueueEvent extends Event
 
     /**
      * Anzahl der maximalen Ausführungen
-     * 0 = unendlich
-     * @var int
+     * '' = unendlich
+     * @var string
      */
-    protected $intervalcount = 1;
+    protected $intervalcount = '';
 
 
     /**
@@ -278,18 +278,18 @@ class AddToQueueEvent extends Event
 
 
     /**
-     * @return int
+     * @return string
      */
-    public function getIntervalcount(): int
+    public function getIntervalcount(): string
     {
         return $this->intervalcount;
     }
 
 
     /**
-     * @param int $intervalcount
+     * @param string $intervalcount
      */
-    public function setIntervalcount(int $intervalcount)
+    public function setIntervalcount(string $intervalcount)
     {
         $this->intervalcount = $intervalcount;
     }
