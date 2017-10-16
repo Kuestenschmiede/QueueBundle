@@ -23,6 +23,12 @@ array_insert($GLOBALS['BE_MOD']['con4gis_bricks'],8, array(
 
 
 /**
+ * HOOK
+ */
+$GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('\con4gis\QueueBundle\Classes\Contao\Hooks\RightsManager', 'setDeleteRightForAdmin');
+
+
+/**
  * API-KEY für die Ausführung der Queue-Verarbeitung
  */
 $GLOBALS['con4gis']['api']['key']['queue'] = '$6$D.AAHGlxy6$CMTMiG6yfiPrbdTb0ejEhT1vsPUl1Z7x1nxRbaC9LqdnDw4naVIVz19F7d6XEX1.GaCMlwOPmERa6ws6RbAGa0';

@@ -5,10 +5,25 @@ services:
 
 
     # AddToQueue
+    con4gis_queue.onAddToQueueListenerLoadOldData:
+        class: con4gis\QueueBundle\Classes\Listener\AddToQueueListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.queue.addtoqueue, method: onAddToQueueListenerLoadOldData }
+
+    con4gis_queue.onAddToQueueListenerQueryKind:
+        class: con4gis\QueueBundle\Classes\Listener\AddToQueueListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.queue.addtoqueue, method: onAddToQueueListenerQueryKind }
+
     con4gis_queue.onAddToQueueListenerQuery:
         class: con4gis\QueueBundle\Classes\Listener\AddToQueueListener
         tags:
             - { name: kernel.event_listener, event: con4gis.queue.addtoqueue, method: onAddToQueueListenerQuery }
+
+    con4gis_queue.onAddToQueueListenerQueryWhere:
+        class: con4gis\QueueBundle\Classes\Listener\AddToQueueListener
+        tags:
+            - { name: kernel.event_listener, event: con4gis.queue.addtoqueue, method: onAddToQueueListenerQueryWhere }
 
     con4gis_queue.onAddToQueueListenerRun:
         class: con4gis\QueueBundle\Classes\Listener\AddToQueueListener

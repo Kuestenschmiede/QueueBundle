@@ -58,7 +58,13 @@ class QueueSetEndTimeListener
         $table          = $event->getQueueTable();
         $field          = $event->getField();
         $id             = $event->getId();
-        $query          = "UPDATE $table SET $field = " . time() . " WHERE id = $id";
+        $query          = "UPDATE $table SET $field = " . time();
+
+        if ($event->getIntervalToRun()) {
+            $query = " AND intervaltorun = " . $event->getIntervalToRun() - 1;
+        }
+
+        $query         .= " WHERE id = $id";
         $event->setQuery($query);
     }
 

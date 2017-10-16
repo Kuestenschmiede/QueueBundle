@@ -40,6 +40,20 @@ class QueueSetEndTimeEvent extends Event
 
 
     /**
+     * Feld in dem die noch auszuführenden Durchläufe gespeichert werden.
+     * @var string
+     */
+    protected $intervalField = 'intervaltorun';
+
+
+    /**
+     * Noch auszuführenden Durchläufe.
+     * @var int
+     */
+    protected $intervalToRun = 0;
+
+
+    /**
      * Name des Events
      * @var int
      */
@@ -104,6 +118,42 @@ class QueueSetEndTimeEvent extends Event
     public function setId(int $id)
     {
         $this->id = $id;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getIntervalField(): string
+    {
+        return $this->intervalField;
+    }
+
+
+    /**
+     * @param string $intervalField
+     */
+    public function setIntervalField(string $intervalField)
+    {
+        $this->intervalField = $intervalField;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getIntervalToRun(): int
+    {
+        return $this->intervalToRun;
+    }
+
+
+    /**
+     * @param int $intervalToRun
+     */
+    public function setIntervalToRun(int $intervalToRun)
+    {
+        $this->intervalToRun = $intervalToRun;
     }
 
 

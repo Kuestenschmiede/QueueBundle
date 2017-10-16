@@ -22,7 +22,7 @@ class RightsManager
 
 
     /**
-     * Ermöglich das Löschen von Datensätzen nur für Admins.
+     * loadDataContainer_Hook: Ermöglich das Löschen von Datensätzen nur für Admins.
      * @param $name
      */
     public function setDeleteRightForAdmin($name)
