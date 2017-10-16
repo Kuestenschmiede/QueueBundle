@@ -107,6 +107,7 @@ class AddToQueueListener
         $srcmodule      = $event->getSrcmodule();
         $srctable       = $event->getSrctable();
         $srcid          = $event->getSrcid();
+        $interval       = $event->getIntervalkind();
         $query         .= "tstamp = " . time();
         $query         .= ", kind = '$kind'";
         $query         .= ", priority = $priotity";
@@ -114,6 +115,7 @@ class AddToQueueListener
         $query         .= ", srcmodule = '$srcmodule'";
         $query         .= ", srcid = $srcid";
         $query         .= ", srctable = '$srctable'";
+        $query         .= ", intervalkind = '$interval'";
         $event->setQuery($query);
     }
 

@@ -227,6 +227,33 @@ $GLOBALS['TL_DCA'][$strName] = array
             'inputType'               => 'text',
             'eval'                    => array('maxlength'=>255),
             'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'intervalkind' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG'][$strName]['intervalkind'],
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'text',
+            'eval'                    => array('maxlength'=>255),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'intervalcount' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG'][$strName]['intervalcount'],
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'text',
+            'eval'                    => array('maxlength'=>255),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'intervaltorun' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG'][$strName]['intervaltorun'],
+            'default'                 => '',
+            'exclude'                 => true,
+            'inputType'               => 'text',
+            'eval'                    => array('maxlength'=>255),
+            'sql'                     => "varchar(255) NOT NULL default ''"
         )
 	)
 );

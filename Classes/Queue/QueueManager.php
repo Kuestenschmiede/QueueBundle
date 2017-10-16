@@ -78,18 +78,14 @@ class QueueManager
      * Speichert ein Event in der Queue für die zeitversetzte Ausführung.
      * @param QueueEvent $saveEvent
      * @param int        $priority
-     * @param string     $srcmodule
-     * @param string     $srctable
-     * @param int        $srcid
+     * @param array      $metaData
      */
-    public function addToQueue(QueueEvent $saveEvent, $priority = 1024, $srcmodule = '', $srctable = '', $srcid = 0)
+    public function addToQueue(QueueEvent $saveEvent, $priority = 1024, array $metaData = array())
     {
         $queueEvent = new AddToQueueEvent();
         $queueEvent->setEvent($saveEvent);
         $queueEvent->setPriority($priority);
-        $queueEvent->setSrcmodule($srcmodule);
-        $queueEvent->setSrctable($srctable);
-        $queueEvent->setSrcid($srcid);
+        $this->addMetaData($queueEvent, $metaData);
         $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
     }
 
@@ -105,10 +101,12 @@ class QueueManager
 
         if ($queueEvents->numRows) {
             while ($queueEvents->next()) {
-                $this->setStartTime($queueEvents->id);
-                $jobEvent = $this->dispatch($queueEvents);
-                $this->setEndTime($queueEvents->id);
-                $this->saveJobResult($queueEvents->id, $jobEvent);
+                if ($this->checkInterval($queueEvents)) {
+                    $this->setStartTime($queueEvents->id);
+                    $jobEvent = $this->dispatch($queueEvents);
+                    $this->setEndTime($queueEvents->id, $queueEvents->intervaltorun);
+                    $this->saveJobResult($queueEvents->id, $jobEvent);
+                }
             }
         } else {
             $this->response($eventname, 'noActiveJobs', 'INFO');
@@ -145,13 +143,52 @@ class QueueManager
 
 
     /**
-     * Setzt die Endzeit der Verarbeitung eines Eintrags in der Queue.
-     * @param $id
+     * Prüft, ob eine Intervallausführung schon wieder nötig ist.
+     * @param $queueEvent
+     * @return bool
      */
-    protected function setEndTime($id)
+    protected function checkInterval($queueEvent)
+    {
+        $endworking = $queueEvent->endworking;
+
+        switch ($queueEvent->intervalkind) {
+            case 'hourly':
+                return ($endworking < (time() - 60 * 60)) ? true : false; // Ist Endworking länger als einen Tag her?
+                break;
+            case 'daily':
+                return ($endworking < (time() - 60 * 60 * 24)) ? true : false;
+                break;
+            case 'weekly':
+                return ($endworking < (time() - 60 * 60 * 24 * 7)) ? true : false;
+                break;
+            case 'monthly':
+                return ($endworking < (time() - 60 * 60 * 24 * 7 * 4)) ? true : false;
+                break;
+            case 'yearly':
+                return ($endworking < (time() - 60 * 60 * 24 * 7 * 4 * 12)) ? true : false;
+                break;
+
+            default:
+                return true;
+                break;
+        }
+    }
+
+
+    /**
+     * Setzt die Endzeit der Verarbeitung eines Eintrags und ggf. die noch durchzuführenden Ausführungen in der Queue.
+     * @param $id
+     * @param $intervalToRun
+     */
+    protected function setEndTime($id, $intervalToRun)
     {
         $queueEvent = new QueueSetEndTimeEvent();
         $queueEvent->setId($id);
+
+        if ($intervalToRun) {
+            $queueEvent->setIntervalToRun($intervalToRun);
+        }
+
         $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
     }
 
@@ -227,4 +264,24 @@ class QueueManager
         $event->setParam($param);
         $this->dispatcher->dispatch($event::NAME, $event);
     }
+
+
+    /**
+     * Setzt die Metadaten für die Queue.
+     * @param       $event
+     * @param array $metaData
+     */
+    protected function addMetaData($event, array $metaData)
+    {
+        if (is_array($metaData) && count($metaData)) {
+            foreach ($metaData as $key => $metaDatum) {
+                $method = 'set' . ucfirst($key);
+
+                if (method_exists($event, $method)) {
+                    $event->$method($metaDatum);
+                }
+            }
+        }
+    }
+
 }
