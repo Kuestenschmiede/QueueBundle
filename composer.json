@@ -2,7 +2,7 @@
   "name": "con4gis/queue",
   "type": "contao-bundle",
   "description": "The batch processing brick of the Contao GIS-kit con4gis.",
-  "keywords": ["con4gis", "queue", "contao", "c4g", "QueueBundle", "con4gisqueuebundle", "c4gqueue"],
+  "keywords": ["con4gis", "queue", "c4g", "QueueBundle", "Stack"],
   "license": "LGPL-3.0+",
   "authors": [
     {
