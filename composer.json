@@ -1,8 +1,8 @@
 {
   "name": "con4gis/queue",
-  "type": "contao-module",
+  "type": "contao-bundle",
   "description": "The batch processing brick of the Contao GIS-kit con4gis.",
-  "keywords": ["con4gis", "queue", "c4g", "QueueBundle", "Stack"],
+  "keywords": ["con4gis", "queue", "c4g", "QueueBundle", "Stack", "batch", "processing"],
   "license": "LGPL-3.0+",
   "authors": [
     {
@@ -17,7 +17,8 @@
     }
   ],
   "support": {
-    "email": "support@con4gis.org"
+    "email": "support@con4gis.org",
+    "issues": "https://github.com/Kuestenschmiede/QueueBundle/issues"
   },
   "require": {
     "con4gis/core": "^2.0"
@@ -39,9 +40,6 @@
       "Resources/contao/languages/",
       "Resources/contao/templates/"
     ]
-  },
-  "support": {
-    "issues": "https://github.com/Kuestenschmiede/QueueBundle/issues"
   },
   "config": {
     "preferred-install": "dist"
