@@ -2,10 +2,8 @@
 
 namespace con4gis\QueueBundle\ContaoManager;
 
-use con4gis\ApiBundle\Con4gisApiBundle;
 use con4gis\CoreBundle\con4gisCoreBundle;
 use con4gis\QueueBundle\con4gisQueueBundle;
-use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Config\ConfigInterface;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
@@ -13,6 +11,7 @@ use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Routing\RoutingPluginInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Config\Loader\LoaderInterface;
 
 class Plugin implements RoutingPluginInterface, BundlePluginInterface
 {
@@ -40,5 +39,16 @@ class Plugin implements RoutingPluginInterface, BundlePluginInterface
             BundleConfig::create(con4gisQueueBundle::class)
                 ->setLoadAfter([con4gisCoreBundle::class])
         ];
+    }
+
+    /**
+     * Allows a plugin to load container configuration.
+     *
+     * @param LoaderInterface $loader
+     * @param array           $managerConfig
+     */
+    public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig)
+    {
+        $loader->load('@con4gisQueueBundle/Resources/config/services.yml');
     }
 }
