@@ -12,8 +12,9 @@ use Contao\ManagerPlugin\Routing\RoutingPluginInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Contao\ManagerPlugin\Config\ConfigPluginInterface;
 
-class Plugin implements RoutingPluginInterface, BundlePluginInterface
+class Plugin implements RoutingPluginInterface, BundlePluginInterface, ConfigPluginInterface
 {
     /**
      * {@inheritdoc}
