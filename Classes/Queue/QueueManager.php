@@ -70,6 +70,10 @@ class QueueManager
     public function setContent($content)
     {
         $content        = (is_array($content) && count($content)) ? trim(implode("\n", $content)) : $content;
+        // is $content an empty array?
+        if (is_array($content) && count($content) == 0) {
+            $content = "";
+        }
         $this->content  = $content;
     }
 
