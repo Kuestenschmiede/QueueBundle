@@ -24,7 +24,7 @@ $strElement = 'Eintrag';
  */
 $GLOBALS['TL_LANG'][$strName]['kind']           = array('Art', 'Name des Events');
 $GLOBALS['TL_LANG'][$strName]['priority']       = array('Priorität', 'Priorität');
-$GLOBALS['TL_LANG'][$strName]['startworking']   = array('Begin der Abarbeitung', 'Begin der Abarbeitung');
+$GLOBALS['TL_LANG'][$strName]['startworking']   = array('Beginn der Abarbeitung', 'Beginn der Abarbeitung');
 $GLOBALS['TL_LANG'][$strName]['endworking']     = array('Ende der Abarbeitung', 'Ende der Abarbeitung');
 $GLOBALS['TL_LANG'][$strName]['haserror']       = array('Fehler', 'Ist bei der Verarbeitung ein Fehler aufgetreten?');
 $GLOBALS['TL_LANG'][$strName]['srcmodule']      = array('Quellmodul', 'Quellmodul des Jobs');
