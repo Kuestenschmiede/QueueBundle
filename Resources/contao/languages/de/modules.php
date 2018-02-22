@@ -11,7 +11,7 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['queue']     = array('Warteschlange', 'Stapelverarbeitung verschiedener Prozesse (Jobs).');
+$GLOBALS['TL_LANG']['MOD']['queue']     = array('Queue: Warteschlange', 'Stapelverarbeitung verschiedener Prozesse (Jobs).');
 
 
 /**
