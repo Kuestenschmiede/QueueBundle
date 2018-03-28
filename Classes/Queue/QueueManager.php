@@ -4,7 +4,7 @@
  * @version   php 7
  * @package   con4gis
  * @author    con4gis authors (see "authors.txt")
- * @copyright Küstenschmiede GmbH Software & Design 2017
+ * @copyright Küstenschmiede GmbH Software & Design 2011 - 2018
  * @link      https://www.kuestenschmiede.de
  */
 namespace con4gis\QueueBundle\Classes\Queue;
@@ -69,11 +69,7 @@ class QueueManager
      */
     public function setContent($content)
     {
-        $content        = (is_array($content) && count($content)) ? trim(implode("\n", $content)) : $content;
-        // is $content an empty array?
-        if (is_array($content) && count($content) == 0) {
-            $content = "";
-        }
+        $content        = (is_array($content) && count($content)) ? trim(implode("\n", $content)) : "";
         $this->content  = $content;
     }
 

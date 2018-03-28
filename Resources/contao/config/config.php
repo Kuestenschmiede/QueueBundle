@@ -5,7 +5,7 @@
  * @version   php 7
  * @package   con4gis
  * @author    con4gis authors (see "authors.txt")
- * @copyright Küstenschmiede GmbH Software & Design 2017
+ * @copyright Küstenschmiede GmbH Software & Design 2011 - 2018
  * @link      https://www.kuestenschmiede.de
  */
 
@@ -14,7 +14,7 @@ $GLOBALS['con4gis']['queue']['installed'] = true;
 /**
  * Backend modules
  */
-array_insert($GLOBALS['BE_MOD']['con4gis_bricks'],8, array(
+array_insert($GLOBALS['BE_MOD']['con4gis_bricks'],5, array(
     'queue' => array
     (
         'tables' => array('tl_c4g_queue')
