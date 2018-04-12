@@ -25,7 +25,7 @@ class QueueCommand extends ContainerAwareCommand
     {
         $this->setName('con4gis:queue')
              ->addArgument('jobname', InputArgument::REQUIRED, 'Name of the job to run?')
-            ->addArgument('showOutput', InputArgument::OPTIONAL, 'Do you want to display the queue output?', true)
+            ->addArgument('showOutput', InputArgument::OPTIONAL, 'Do you want to display the queue output?', "false")
             ->addArgument('jobcount', InputArgument::OPTIONAL, 'How many jobs should be executed?', 10)
              ->setDescription('Run a job in the con4gis queue.')
         ;
