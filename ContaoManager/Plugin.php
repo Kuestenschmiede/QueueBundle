@@ -3,6 +3,9 @@
 namespace con4gis\QueueBundle\ContaoManager;
 
 use con4gis\CoreBundle\con4gisCoreBundle;
+use con4gis\ExportBundle\con4gisExportBundle;
+use con4gis\ImportBundle\con4gisImportBundle;
+use con4gis\MapsBundle\con4gisMapsBundle;
 use con4gis\QueueBundle\con4gisQueueBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Config\ConfigInterface;
@@ -38,7 +41,7 @@ class Plugin implements RoutingPluginInterface, BundlePluginInterface, ConfigPlu
     {
         return [
             BundleConfig::create(con4gisQueueBundle::class)
-                ->setLoadAfter([con4gisCoreBundle::class])
+                ->setLoadAfter([con4gisCoreBundle::class, con4gisImportBundle::class])
         ];
     }
 

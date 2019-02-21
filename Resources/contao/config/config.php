@@ -14,7 +14,7 @@ $GLOBALS['con4gis']['queue']['installed'] = true;
 /**
  * Backend modules
  */
-array_insert($GLOBALS['BE_MOD']['con4gis_bricks'],5, array(
+$GLOBALS['BE_MOD']['con4gis'] = array_merge($GLOBALS['BE_MOD']['con4gis'], array(
     'queue' => array
     (
         'tables' => array('tl_c4g_queue')
