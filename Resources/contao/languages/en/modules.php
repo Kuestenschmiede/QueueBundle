@@ -13,7 +13,7 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['queue']     = array('Queue: Task Management', 'Batch processing of tasks (job).');
+$GLOBALS['TL_LANG']['MOD']['queue']     = array('Task Management', 'Batch processing of tasks (job).');
 
 
 /**
