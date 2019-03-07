@@ -16,15 +16,15 @@ $GLOBALS['con4gis']['queue']['installed'] = true;
 /**
  * Backend modules
  */
-$GLOBALS['BE_MOD']['con4gis'] = array_merge($GLOBALS['BE_MOD']['con4gis'], array(
+$GLOBALS['BE_MOD']['con4gis_core'] = array_merge($GLOBALS['BE_MOD']['con4gis_core'], array(
     'queue' => array
     (
         'tables' => array('tl_c4g_queue')
     )
 ));
 
-$GLOBALS['BE_MOD']['con4gis'] =
-    \con4gis\CoreBundle\Resources\contao\classes\C4GUtils::sortBackendModules($GLOBALS['BE_MOD']['con4gis']);
+//$GLOBALS['BE_MOD']['con4gis'] =
+//    \con4gis\CoreBundle\Resources\contao\classes\C4GUtils::sortBackendModules($GLOBALS['BE_MOD']['con4gis']);
 /**
  * HOOK
  */
