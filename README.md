@@ -1,15 +1,18 @@
-con4gis-Queue
-=============
-The batch processing brick of the Contao GIS-kit **con4gis**.
+# con4gis-QueueBundle
+## Overview
+The queue brick of the Contao GIS-kit **con4gis**. This bundle provides a job queue, which can be processed as background task via a cronjob.
+The type of jobs is very flexible, as the queue is built upon the Symfony event system.
 
-**Git Repository:** QueueBundle  
-**Composer Vendor/Package:** [con4gis/queue](https://packagist.org/packages/con4gis/queue)  
-**Website:** [con4gis.org](https://con4gis.org)
+## Installation
+Via composer:
+```
+composer require con4gis/queue
+```
+Alternatively, you can use the Contao Manager to install the con4gis-QueueBundle.
 
-**Requires:**
-- [Contao](https://github.com/contao/core) (***4.4.x***)   
+## Requirements
+- [Contao](https://github.com/contao/core-bundle) (***4.4.x LTS*** or latest stable release)
 - [CoreBundle](https://github.com/Kuestenschmiede/CoreBundle/releases) (*latest stable release*)
 
-**Extendable with other con4gis and Contao bundles**  
-con4gis is not a connectable application. It's a collection of content 
-elements for your website. So you can build your own individual and limitless web applications.
+## Documentation
+Visit [docs.con4gis.org](https://docs.con4gis.org) for a user documentation. You can also contact us via the support forum there.
