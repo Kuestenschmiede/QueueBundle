@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -22,14 +22,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class QueueSetEndTimeListener
 {
-
-
     /**
      * Instanz von \Contao\Database
      * @var \Contao\Database|null
      */
     protected $database = null;
-
 
     /**
      * ExportRunListener constructor.
@@ -44,7 +41,6 @@ class QueueSetEndTimeListener
         }
     }
 
-
     /**
      * Erstellt die Abfrage für das Einfügen des Enddatums in die Queue-Tabelle.
      * @param QueueSetEndTimeEvent     $event
@@ -56,19 +52,18 @@ class QueueSetEndTimeListener
         $eventName,
         EventDispatcherInterface $dispatcher
     ) {
-        $table          = $event->getQueueTable();
-        $field          = $event->getField();
-        $id             = $event->getId();
-        $query          = "UPDATE $table SET $field = " . time();
+        $table = $event->getQueueTable();
+        $field = $event->getField();
+        $id = $event->getId();
+        $query = "UPDATE $table SET $field = " . time();
 
         if ($event->getIntervalToRun()) {
-            $query = " AND intervaltorun = " . $event->getIntervalToRun() - 1;
+            $query = ' AND intervaltorun = ' . $event->getIntervalToRun() - 1;
         }
 
-        $query         .= " WHERE id = $id";
+        $query .= " WHERE id = $id";
         $event->setQuery($query);
     }
-
 
     /**
      * Führt die Abfrage aus.

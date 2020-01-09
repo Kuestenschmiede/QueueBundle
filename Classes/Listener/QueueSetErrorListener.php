@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -22,14 +22,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class QueueSetErrorListener
 {
-
-
     /**
      * Instanz von \Contao\Database
      * @var \Contao\Database|null
      */
     protected $database = null;
-
 
     /**
      * ExportRunListener constructor.
@@ -44,7 +41,6 @@ class QueueSetErrorListener
         }
     }
 
-
     /**
      * Erstellt die Abfrage für das Einfügen eines Fehlers in die Queue-Tabelle.
      * @param QueueSetErrorEvent       $event
@@ -56,13 +52,12 @@ class QueueSetErrorListener
         $eventName,
         EventDispatcherInterface $dispatcher
     ) {
-        $table          = $event->getQueueTable();
-        $field          = $event->getField();
-        $id             = $event->getId();
-        $query          = "UPDATE $table SET $field = 1 WHERE id = $id";
+        $table = $event->getQueueTable();
+        $field = $event->getField();
+        $id = $event->getId();
+        $query = "UPDATE $table SET $field = 1 WHERE id = $id";
         $event->setQuery($query);
     }
-
 
     /**
      * Führt die Abfrage aus.

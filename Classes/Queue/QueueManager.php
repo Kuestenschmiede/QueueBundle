@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -28,21 +28,17 @@ use Contao\System;
  */
 class QueueManager
 {
-
-
     /**
      * Instanz des EventDispatchers
      * @var null|object
      */
     protected $dispatcher = null;
 
-
     /**
      * Rückmeldung der Queue
      * @var string
      */
     protected $content = '';
-
 
     /**
      * QueueManager constructor.
@@ -57,7 +53,6 @@ class QueueManager
         }
     }
 
-
     /**
      * @return string
      */
@@ -66,16 +61,14 @@ class QueueManager
         return $this->content;
     }
 
-
     /**
      * @param $content
      */
     public function setContent($content)
     {
-        $content        = (is_array($content) && count($content)) ? trim(implode("\n", $content)) : "";
-        $this->content  = $content;
+        $content = (is_array($content) && count($content)) ? trim(implode("\n", $content)) : '';
+        $this->content = $content;
     }
-
 
     /**
      * Speichert ein Event in der Queue für die zeitversetzte Ausführung.
@@ -83,7 +76,7 @@ class QueueManager
      * @param int        $priority
      * @param array      $metaData
      */
-    public function addToQueue(QueueEvent $saveEvent, $priority = 1024, array $metaData = array())
+    public function addToQueue(QueueEvent $saveEvent, $priority = 1024, array $metaData = [])
     {
         $queueEvent = new AddToQueueEvent();
         $queueEvent->setEvent($saveEvent);
@@ -91,7 +84,6 @@ class QueueManager
         $this->addMetaData($queueEvent, $metaData);
         $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
     }
-
 
     /**
      * Startet die Verarbeitung der Events eines Types der Queue.
@@ -116,7 +108,6 @@ class QueueManager
         }
     }
 
-
     /**
      * Lädt die angegebene Anzahl an Elementen des übergebenen Events von der Queue.
      * @param $eventname
@@ -129,9 +120,9 @@ class QueueManager
         $queueEvent->setKind($eventname);
         $queueEvent->setCount($count);
         $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
+
         return $queueEvent->getEvents();
     }
-
 
     /**
      * Setzt die Startzeit der Verarbeitung für einen Eintrag der Queue.
@@ -143,7 +134,6 @@ class QueueManager
         $queueEvent->setId($id);
         $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
     }
-
 
     /**
      * Prüft, ob eine Intervallausführung schon wieder nötig ist.
@@ -160,23 +150,27 @@ class QueueManager
                 break;
             case 'daily':
                 return ($endworking < (time() - 60 * 60 * 24)) ? true : false;
+
                 break;
             case 'weekly':
                 return ($endworking < (time() - 60 * 60 * 24 * 7)) ? true : false;
+
                 break;
             case 'monthly':
                 return ($endworking < (time() - 60 * 60 * 24 * 7 * 4)) ? true : false;
+
                 break;
             case 'yearly':
                 return ($endworking < (time() - 60 * 60 * 24 * 7 * 4 * 12)) ? true : false;
+
                 break;
 
             default:
                 return true;
+
                 break;
         }
     }
-
 
     /**
      * Setzt die Endzeit der Verarbeitung eines Eintrags und ggf. die noch durchzuführenden Ausführungen in der Queue.
@@ -195,7 +189,6 @@ class QueueManager
         $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
     }
 
-
     /**
      * Setzt die Endzeit der Verarbeitung eines Eintrags in der Queue.
      * @param $id
@@ -206,7 +199,6 @@ class QueueManager
         $queueEvent->setId($id);
         $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
     }
-
 
     /**
      * Speichernt das verarbeitete Event in der Queue, damit die Fehlermeldungen erhalten bleiben.
@@ -222,7 +214,6 @@ class QueueManager
             $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
         }
     }
-
 
     /**
      * Ruft die Verarbeitung eines Events der Queue auf.
@@ -248,7 +239,6 @@ class QueueManager
         }
     }
 
-
     /**
      * Ruft das Event für die Rückgabe auf.
      * @param        $eventname
@@ -256,7 +246,7 @@ class QueueManager
      * @param string $kind
      * @param array  $param
      */
-    protected function response($eventname, $content, $kind = 'INFO', $param = array())
+    protected function response($eventname, $content, $kind = 'INFO', $param = [])
     {
         $this->setContent($content);
 
@@ -267,7 +257,6 @@ class QueueManager
         $event->setParam($param);
         $this->dispatcher->dispatch($event::NAME, $event);
     }
-
 
     /**
      * Setzt die Metadaten für die Queue.
@@ -286,5 +275,4 @@ class QueueManager
             }
         }
     }
-
 }

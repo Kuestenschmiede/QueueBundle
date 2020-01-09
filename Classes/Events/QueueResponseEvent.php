@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -20,26 +20,21 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class QueueResponseEvent extends Event
 {
-
-
     /**
      * Name des Events
      */
     const NAME = 'con4gis.queue.response';
-
 
     /**
      * gültige Level für $this->kind
      */
     const LEVEL = ['DEBUG', 'INFO', 'NOTICE', 'WARNING', 'ERROR', 'CRITICAL', 'ALERT', 'EMERGENCY'];
 
-
     /**
      * Name der Queue (bzw. des Verarbeiteten Events)
      * @var string
      */
     protected $queueName = '';
-
 
     /**
      * Art der Nachricht, vergleichbar mit Debuglevel (DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY)
@@ -48,20 +43,17 @@ class QueueResponseEvent extends Event
      */
     protected $kind = 'INFO';
 
-
     /**
      * Inhalt der Nachricht
      * @var string
      */
     protected $content = '';
 
-
     /**
      * optional: Parameter für die Nachricht.
      * @var array
      */
-    protected $param = array();
-
+    protected $param = [];
 
     /**
      * @return string
@@ -71,7 +63,6 @@ class QueueResponseEvent extends Event
         return $this->queueName;
     }
 
-
     /**
      * @param string $queueName
      */
@@ -80,7 +71,6 @@ class QueueResponseEvent extends Event
         $this->queueName = $queueName;
     }
 
-
     /**
      * @return string
      */
@@ -88,7 +78,6 @@ class QueueResponseEvent extends Event
     {
         return $this->kind;
     }
-
 
     /**
      * @param string $kind
@@ -105,7 +94,6 @@ class QueueResponseEvent extends Event
         }
     }
 
-
     /**
      * @return string
      */
@@ -113,7 +101,6 @@ class QueueResponseEvent extends Event
     {
         return $this->content;
     }
-
 
     /**
      * @param mixed $content
@@ -127,7 +114,6 @@ class QueueResponseEvent extends Event
         $this->content = $content;
     }
 
-
     /**
      * @return array
      */
@@ -135,7 +121,6 @@ class QueueResponseEvent extends Event
     {
         return $this->param;
     }
-
 
     /**
      * @param array $param

@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -20,13 +20,10 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class AddToQueueEvent extends Event
 {
-
-
     /**
      * Name des Events
      */
     const NAME = 'con4gis.queue.addtoqueue';
-
 
     /**
      * Name der Tabelle in der die Queues gespeichert werden.
@@ -34,13 +31,11 @@ class AddToQueueEvent extends Event
      */
     protected $queueTable = 'tl_c4g_queue';
 
-
     /**
      * Name des Events
      * @var string
      */
     protected $kind = '';
-
 
     /**
      * Priorität des Events.
@@ -48,13 +43,11 @@ class AddToQueueEvent extends Event
      */
     protected $priority = 1024;
 
-
     /**
      * Event, welches auf in die Queue eingefügt werden soll.
      * @var Event
      */
     protected $event = null;
-
 
     /**
      * Moduel des Quelldatensatzes, falls vorhanden.
@@ -63,14 +56,12 @@ class AddToQueueEvent extends Event
      */
     protected $srcmodule = '';
 
-
     /**
      * Tabelle des Quelldatensatzes, falls vorhanden.
      * Wird benötigt, um beim erneuten Speichern den Queuejob zu aktualisieren.
      * @var string
      */
     protected $srctable = '';
-
 
     /**
      * Id des Quelldatensatzes, falls vorhanden.
@@ -79,7 +70,6 @@ class AddToQueueEvent extends Event
      */
     protected $srcid = 0;
 
-
     /**
      * Schon vorhandener Datensatz, falls vorhanden.
      * Wird benötigt, um beim erneuten Speichern den Queuejob zu aktualisieren.
@@ -87,13 +77,11 @@ class AddToQueueEvent extends Event
      */
     protected $oldData = null;
 
-
     /**
      * Intervall in dem der Job ausgeführt werden soll.
      * @var string
      */
     protected $intervalkind = '';
-
 
     /**
      * Anzahl der maximalen Ausführungen
@@ -102,20 +90,17 @@ class AddToQueueEvent extends Event
      */
     protected $intervalcount = '';
 
-
     /**
      * Anzhal der noch offen Aufrufe des Jobs bis die maximale Ausführung erreicht ist.
      * @var int
      */
     protected $intervaltorun = 1;
 
-
     /**
      * Query für das Einfügen der Daten in die Queue.
      * @var string
      */
     protected $query = '';
-
 
     /**
      * @return string
@@ -125,7 +110,6 @@ class AddToQueueEvent extends Event
         return $this->queueTable;
     }
 
-
     /**
      * @param string $queueTable
      */
@@ -133,7 +117,6 @@ class AddToQueueEvent extends Event
     {
         $this->queueTable = $queueTable;
     }
-
 
     /**
      * @return string
@@ -143,7 +126,6 @@ class AddToQueueEvent extends Event
         return $this->kind;
     }
 
-
     /**
      * @param string $kind
      */
@@ -151,7 +133,6 @@ class AddToQueueEvent extends Event
     {
         $this->kind = $kind;
     }
-
 
     /**
      * @return int
@@ -161,7 +142,6 @@ class AddToQueueEvent extends Event
         return $this->priority;
     }
 
-
     /**
      * @param int $priority
      */
@@ -170,7 +150,6 @@ class AddToQueueEvent extends Event
         $this->priority = $priority;
     }
 
-
     /**
      * @return Event
      */
@@ -178,7 +157,6 @@ class AddToQueueEvent extends Event
     {
         return $this->event;
     }
-
 
     /**
      * @param Event $event
@@ -189,7 +167,6 @@ class AddToQueueEvent extends Event
         $this->setKind($event::NAME);
     }
 
-
     /**
      * @return string
      */
@@ -197,7 +174,6 @@ class AddToQueueEvent extends Event
     {
         return $this->srcmodule;
     }
-
 
     /**
      * @param string $srcmodule
@@ -207,7 +183,6 @@ class AddToQueueEvent extends Event
         $this->srcmodule = $srcmodule;
     }
 
-
     /**
      * @return string
      */
@@ -215,7 +190,6 @@ class AddToQueueEvent extends Event
     {
         return $this->srctable;
     }
-
 
     /**
      * @param string $srctable
@@ -225,7 +199,6 @@ class AddToQueueEvent extends Event
         $this->srctable = $srctable;
     }
 
-
     /**
      * @return int
      */
@@ -233,7 +206,6 @@ class AddToQueueEvent extends Event
     {
         return $this->srcid;
     }
-
 
     /**
      * @param int $srcid
@@ -243,7 +215,6 @@ class AddToQueueEvent extends Event
         $this->srcid = $srcid;
     }
 
-
     /**
      * @return null
      */
@@ -251,7 +222,6 @@ class AddToQueueEvent extends Event
     {
         return $this->oldData;
     }
-
 
     /**
      * @param null $oldData
@@ -261,7 +231,6 @@ class AddToQueueEvent extends Event
         $this->oldData = $oldData;
     }
 
-
     /**
      * @return string
      */
@@ -269,7 +238,6 @@ class AddToQueueEvent extends Event
     {
         return $this->intervalkind;
     }
-
 
     /**
      * @param string $intervalkind
@@ -279,7 +247,6 @@ class AddToQueueEvent extends Event
         $this->intervalkind = $intervalkind;
     }
 
-
     /**
      * @return string
      */
@@ -287,7 +254,6 @@ class AddToQueueEvent extends Event
     {
         return $this->intervalcount;
     }
-
 
     /**
      * @param string $intervalcount
@@ -297,7 +263,6 @@ class AddToQueueEvent extends Event
         $this->intervalcount = $intervalcount;
     }
 
-
     /**
      * @return int
      */
@@ -305,7 +270,6 @@ class AddToQueueEvent extends Event
     {
         return $this->intervaltorun;
     }
-
 
     /**
      * @param int $intervaltorun
@@ -315,7 +279,6 @@ class AddToQueueEvent extends Event
         $this->intervaltorun = $intervaltorun;
     }
 
-
     /**
      * @return string
      */
@@ -323,7 +286,6 @@ class AddToQueueEvent extends Event
     {
         return $this->query;
     }
-
 
     /**
      * @param string $query

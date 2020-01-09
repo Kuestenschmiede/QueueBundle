@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -20,13 +20,10 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class QueueSaveJobResultEvent extends Event
 {
-
-
     /**
      * Name des Events
      */
     const NAME = 'con4gis.queue.savejobresult';
-
 
     /**
      * Name der Tabelle in der die Queues gespeichert werden.
@@ -34,13 +31,11 @@ class QueueSaveJobResultEvent extends Event
      */
     protected $queueTable = 'tl_c4g_queue';
 
-
     /**
      * Name des Felds in welches die Startzeit eingtragen werden soll.
      * @var string
      */
     protected $field = 'data';
-
 
     /**
      * Name des Events
@@ -48,19 +43,16 @@ class QueueSaveJobResultEvent extends Event
      */
     protected $id = 0;
 
-
     /**
      * @var null
      */
     protected $data = null;
-
 
     /**
      * Query für das Eintragen der Endzeit.
      * @var string
      */
     protected $query = '';
-
 
     /**
      * @return string
@@ -70,7 +62,6 @@ class QueueSaveJobResultEvent extends Event
         return $this->queueTable;
     }
 
-
     /**
      * @param string $queueTable
      */
@@ -78,7 +69,6 @@ class QueueSaveJobResultEvent extends Event
     {
         $this->queueTable = $queueTable;
     }
-
 
     /**
      * @return string
@@ -88,7 +78,6 @@ class QueueSaveJobResultEvent extends Event
         return $this->field;
     }
 
-
     /**
      * @param string $field
      */
@@ -96,7 +85,6 @@ class QueueSaveJobResultEvent extends Event
     {
         $this->field = $field;
     }
-
 
     /**
      * @return int
@@ -106,7 +94,6 @@ class QueueSaveJobResultEvent extends Event
         return $this->id;
     }
 
-
     /**
      * @param int $id
      */
@@ -114,7 +101,6 @@ class QueueSaveJobResultEvent extends Event
     {
         $this->id = $id;
     }
-
 
     /**
      * @return null
@@ -124,7 +110,6 @@ class QueueSaveJobResultEvent extends Event
         return $this->data;
     }
 
-
     /**
      * @param null $data
      */
@@ -133,7 +118,6 @@ class QueueSaveJobResultEvent extends Event
         $this->data = $data;
     }
 
-
     /**
      * @return string
      */
@@ -141,7 +125,6 @@ class QueueSaveJobResultEvent extends Event
     {
         return $this->query;
     }
-
 
     /**
      * @param string $query

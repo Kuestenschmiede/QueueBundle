@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -13,7 +13,6 @@
 namespace con4gis\QueueBundle\Classes\Listener;
 
 use con4gis\QueueBundle\Classes\Events\QueueSaveJobResultEvent;
-use con4gis\QueueBundle\Classes\Events\QueueSetErrorEvent;
 use Contao\Database;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -23,14 +22,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class QueueSaveJobResultListener
 {
-
-
     /**
      * Instanz von \Contao\Database
      * @var \Contao\Database|null
      */
     protected $database = null;
-
 
     /**
      * ExportRunListener constructor.
@@ -45,7 +41,6 @@ class QueueSaveJobResultListener
         }
     }
 
-
     /**
      * Erstellt die Abfrage für das Einfügen eines Fehlers in die Queue-Tabelle.
      * @param QueueSaveJobResultEvent  $event
@@ -57,14 +52,13 @@ class QueueSaveJobResultListener
         $eventName,
         EventDispatcherInterface $dispatcher
     ) {
-        $table          = $event->getQueueTable();
-        $field          = $event->getField();
-        $data           = urlencode(serialize($event->getData()));
-        $id             = $event->getId();
-        $query          = "UPDATE $table SET $field = '$data' WHERE id = $id";
+        $table = $event->getQueueTable();
+        $field = $event->getField();
+        $data = urlencode(serialize($event->getData()));
+        $id = $event->getId();
+        $query = "UPDATE $table SET $field = '$data' WHERE id = $id";
         $event->setQuery($query);
     }
-
 
     /**
      * Führt die Abfrage aus.

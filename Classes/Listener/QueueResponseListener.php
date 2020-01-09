@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -22,8 +22,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class QueueResponseListener
 {
-
-
     /**
      * Ruft die Verarbeitung des Responses auf.
      * @param QueueResponseEvent       $event
@@ -42,7 +40,6 @@ class QueueResponseListener
         }
     }
 
-
     /**
      * Ruft die Verarbeitung des Responses auf.
      * @param QueueResponseEvent       $event
@@ -54,17 +51,17 @@ class QueueResponseListener
         $eventName,
         EventDispatcherInterface $dispatcher
     ) {
-        $queueName          = $event->getQueueName();
-        $kind               = $event->getKind();
-        $content            = $event->getContent();
-        $msgKey             = 'con4gis - QueueMessage';
-        $msgType            = $queueName . '_' . $kind;
-        $param              = $event->getParam();
+        $queueName = $event->getQueueName();
+        $kind = $event->getKind();
+        $content = $event->getContent();
+        $msgKey = 'con4gis - QueueMessage';
+        $msgType = $queueName . '_' . $kind;
+        $param = $event->getParam();
         $param['queueName'] = $queueName;
-        $param['kind']      = $kind;
-        $param['content']   = $content;
-        $param['msgKey']    = $msgKey;
-        $param['msgType']   = $msgType;
+        $param['kind'] = $kind;
+        $param['content'] = $content;
+        $param['msgKey'] = $msgKey;
+        $param['msgType'] = $msgType;
 
         if (class_exists('Notification')) {
             $notifications = Notification::findByType($msgType);

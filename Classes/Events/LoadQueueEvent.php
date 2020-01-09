@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -21,13 +21,10 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class LoadQueueEvent extends Event
 {
-
-
     /**
      * Name des Events
      */
     const NAME = 'con4gis.queue.loadqueue';
-
 
     /**
      * Name der Tabelle in der die Queues gespeichert werden.
@@ -35,13 +32,11 @@ class LoadQueueEvent extends Event
      */
     protected $queueTable = 'tl_c4g_queue';
 
-
     /**
      * Anzahl der zuladenen Datensätze.
      * @var int
      */
     protected $count = 0;
-
 
     /**
      * Name des Events
@@ -49,20 +44,17 @@ class LoadQueueEvent extends Event
      */
     protected $kind = '';
 
-
     /**
      * Query für das Einfügen der Daten in die Queue.
      * @var string
      */
     protected $query = '';
 
-
     /**
      * Events, welche von der Queue geleade wurden.
      * @var Result
      */
     protected $events = null;
-
 
     /**
      * @return string
@@ -72,7 +64,6 @@ class LoadQueueEvent extends Event
         return $this->queueTable;
     }
 
-
     /**
      * @param string $queueTable
      */
@@ -80,7 +71,6 @@ class LoadQueueEvent extends Event
     {
         $this->queueTable = $queueTable;
     }
-
 
     /**
      * @return string
@@ -90,7 +80,6 @@ class LoadQueueEvent extends Event
         return $this->kind;
     }
 
-
     /**
      * @param string $kind
      */
@@ -98,7 +87,6 @@ class LoadQueueEvent extends Event
     {
         $this->kind = $kind;
     }
-
 
     /**
      * @return int
@@ -108,7 +96,6 @@ class LoadQueueEvent extends Event
         return $this->count;
     }
 
-
     /**
      * @param int $count
      */
@@ -116,7 +103,6 @@ class LoadQueueEvent extends Event
     {
         $this->count = $count;
     }
-
 
     /**
      * @return string
@@ -126,7 +112,6 @@ class LoadQueueEvent extends Event
         return $this->query;
     }
 
-
     /**
      * @param string $query
      */
@@ -135,7 +120,6 @@ class LoadQueueEvent extends Event
         $this->query = $query;
     }
 
-
     /**
      * @return Result
      */
@@ -143,7 +127,6 @@ class LoadQueueEvent extends Event
     {
         return $this->events;
     }
-
 
     /**
      * @param Result $events

@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -20,13 +20,10 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class QueueSetStartTimeEvent extends Event
 {
-
-
     /**
      * Name des Events
      */
     const NAME = 'con4gis.queue.setstarttime';
-
 
     /**
      * Name der Tabelle in der die Queues gespeichert werden.
@@ -34,13 +31,11 @@ class QueueSetStartTimeEvent extends Event
      */
     protected $queueTable = 'tl_c4g_queue';
 
-
     /**
      * Name des Felds in welches die Startzeit eingtragen werden soll.
      * @var string
      */
     protected $field = 'startworking';
-
 
     /**
      * Name des Events
@@ -48,13 +43,11 @@ class QueueSetStartTimeEvent extends Event
      */
     protected $id = 0;
 
-
     /**
      * Query für das Eintragen der Startzeit.
      * @var string
      */
     protected $query = '';
-
 
     /**
      * @return string
@@ -64,7 +57,6 @@ class QueueSetStartTimeEvent extends Event
         return $this->queueTable;
     }
 
-
     /**
      * @param string $queueTable
      */
@@ -72,7 +64,6 @@ class QueueSetStartTimeEvent extends Event
     {
         $this->queueTable = $queueTable;
     }
-
 
     /**
      * @return string
@@ -82,7 +73,6 @@ class QueueSetStartTimeEvent extends Event
         return $this->field;
     }
 
-
     /**
      * @param string $field
      */
@@ -90,7 +80,6 @@ class QueueSetStartTimeEvent extends Event
     {
         $this->field = $field;
     }
-
 
     /**
      * @return int
@@ -100,7 +89,6 @@ class QueueSetStartTimeEvent extends Event
         return $this->id;
     }
 
-
     /**
      * @param int $id
      */
@@ -109,7 +97,6 @@ class QueueSetStartTimeEvent extends Event
         $this->id = $id;
     }
 
-
     /**
      * @return string
      */
@@ -117,7 +104,6 @@ class QueueSetStartTimeEvent extends Event
     {
         return $this->query;
     }
-
 
     /**
      * @param string $query

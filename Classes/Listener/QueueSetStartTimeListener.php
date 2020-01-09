@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -22,14 +22,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class QueueSetStartTimeListener
 {
-
-
     /**
      * Instanz von \Contao\Database
      * @var \Contao\Database|null
      */
     protected $database = null;
-
 
     /**
      * ExportRunListener constructor.
@@ -44,7 +41,6 @@ class QueueSetStartTimeListener
         }
     }
 
-
     /**
      * Erstellt die Abfrage für das Einfügen des Startdatums in die Queue-Tabelle.
      * @param QueueSetStartTimeEvent   $event
@@ -56,13 +52,12 @@ class QueueSetStartTimeListener
         $eventName,
         EventDispatcherInterface $dispatcher
     ) {
-        $table          = $event->getQueueTable();
-        $field          = $event->getField();
-        $id             = $event->getId();
-        $query          = "UPDATE $table SET $field = " . time() . " WHERE id = $id";
+        $table = $event->getQueueTable();
+        $field = $event->getField();
+        $id = $event->getId();
+        $query = "UPDATE $table SET $field = " . time() . " WHERE id = $id";
         $event->setQuery($query);
     }
-
 
     /**
      * Führt die Abfrage aus.

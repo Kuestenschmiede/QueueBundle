@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -20,13 +20,10 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class QueueSetEndTimeEvent extends Event
 {
-
-
     /**
      * Name des Events
      */
     const NAME = 'con4gis.queue.setendtime';
-
 
     /**
      * Name der Tabelle in der die Queues gespeichert werden.
@@ -34,13 +31,11 @@ class QueueSetEndTimeEvent extends Event
      */
     protected $queueTable = 'tl_c4g_queue';
 
-
     /**
      * Name des Felds in welches die Startzeit eingtragen werden soll.
      * @var string
      */
     protected $field = 'endworking';
-
 
     /**
      * Feld in dem die noch auszuführenden Durchläufe gespeichert werden.
@@ -48,13 +43,11 @@ class QueueSetEndTimeEvent extends Event
      */
     protected $intervalField = 'intervaltorun';
 
-
     /**
      * Noch auszuführenden Durchläufe.
      * @var int
      */
     protected $intervalToRun = 0;
-
 
     /**
      * Name des Events
@@ -62,13 +55,11 @@ class QueueSetEndTimeEvent extends Event
      */
     protected $id = 0;
 
-
     /**
      * Query für das Eintragen der Endzeit.
      * @var string
      */
     protected $query = '';
-
 
     /**
      * @return string
@@ -78,7 +69,6 @@ class QueueSetEndTimeEvent extends Event
         return $this->queueTable;
     }
 
-
     /**
      * @param string $queueTable
      */
@@ -86,7 +76,6 @@ class QueueSetEndTimeEvent extends Event
     {
         $this->queueTable = $queueTable;
     }
-
 
     /**
      * @return string
@@ -96,7 +85,6 @@ class QueueSetEndTimeEvent extends Event
         return $this->field;
     }
 
-
     /**
      * @param string $field
      */
@@ -104,7 +92,6 @@ class QueueSetEndTimeEvent extends Event
     {
         $this->field = $field;
     }
-
 
     /**
      * @return int
@@ -114,7 +101,6 @@ class QueueSetEndTimeEvent extends Event
         return $this->id;
     }
 
-
     /**
      * @param int $id
      */
@@ -122,7 +108,6 @@ class QueueSetEndTimeEvent extends Event
     {
         $this->id = $id;
     }
-
 
     /**
      * @return string
@@ -132,7 +117,6 @@ class QueueSetEndTimeEvent extends Event
         return $this->intervalField;
     }
 
-
     /**
      * @param string $intervalField
      */
@@ -140,7 +124,6 @@ class QueueSetEndTimeEvent extends Event
     {
         $this->intervalField = $intervalField;
     }
-
 
     /**
      * @return int
@@ -150,7 +133,6 @@ class QueueSetEndTimeEvent extends Event
         return $this->intervalToRun;
     }
 
-
     /**
      * @param int $intervalToRun
      */
@@ -159,7 +141,6 @@ class QueueSetEndTimeEvent extends Event
         $this->intervalToRun = $intervalToRun;
     }
 
-
     /**
      * @return string
      */
@@ -167,7 +148,6 @@ class QueueSetEndTimeEvent extends Event
     {
         return $this->query;
     }
-
 
     /**
      * @param string $query

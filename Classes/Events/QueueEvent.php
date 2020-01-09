@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -20,14 +20,11 @@ use Symfony\Component\EventDispatcher\Event;
  */
 abstract class QueueEvent extends Event
 {
-
-
     /**
      * Array mit den Errormeldungen.
      * @var array
      */
-    protected $error = array();
-
+    protected $error = [];
 
     /**
      * Falg zeigt an, ob Fehler während der Verarbeitung aufgetreten sind.
@@ -35,21 +32,18 @@ abstract class QueueEvent extends Event
      */
     protected $hasError = false;
 
-
     /**
      * Rückmeldung des Verarbeitungsprozesses (keine Fehler).
      * @var array
      */
-    protected $returnMessages = array();
-
+    protected $returnMessages = [];
 
     /**
      * Array mit zusätzlichen Informationen. Diese können für die Rückgabe als InsertTags für das
      * NotificationCenter benutzt werden.
      * @var array
      */
-    protected $param = array();
-
+    protected $param = [];
 
     /**
      * @return array
@@ -59,7 +53,6 @@ abstract class QueueEvent extends Event
         return $this->error;
     }
 
-
     /**
      * @param array $error
      */
@@ -68,16 +61,14 @@ abstract class QueueEvent extends Event
         $this->error = $error;
     }
 
-
     /**
      * @param mixed $error
      */
     public function addError($error)
     {
-        $error          = (is_array($error)) ? $error : array($error);
-        $this->error    = array_merge($this->error, $error);
+        $error = (is_array($error)) ? $error : [$error];
+        $this->error = array_merge($this->error, $error);
     }
-
 
     /**
      * @return bool
@@ -87,7 +78,6 @@ abstract class QueueEvent extends Event
         return $this->hasError;
     }
 
-
     /**
      * @param bool $hasError
      */
@@ -95,7 +85,6 @@ abstract class QueueEvent extends Event
     {
         $this->hasError = $hasError;
     }
-
 
     /**
      * @return array
@@ -105,7 +94,6 @@ abstract class QueueEvent extends Event
         return $this->returnMessages;
     }
 
-
     /**
      * @param array $returnMessages
      */
@@ -114,16 +102,14 @@ abstract class QueueEvent extends Event
         $this->returnMessages = $returnMessages;
     }
 
-
     /**
      * @param mixed $returnMessage
      */
     public function addReturnMessage($returnMessage)
     {
-        $returnMessage          = (is_array($returnMessage)) ? $returnMessage : array($returnMessage);
-        $this->returnMessages   = array_merge($this->returnMessages,$returnMessage);
+        $returnMessage = (is_array($returnMessage)) ? $returnMessage : [$returnMessage];
+        $this->returnMessages = array_merge($this->returnMessages, $returnMessage);
     }
-
 
     /**
      * @return array
@@ -132,7 +118,6 @@ abstract class QueueEvent extends Event
     {
         return $this->param;
     }
-
 
     /**
      * @param array $param

@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -22,14 +22,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class LoadQueueListener
 {
-
-
     /**
      * Instanz von \Contao\Database
      * @var \Contao\Database|null
      */
     protected $database = null;
-
 
     /**
      * ExportRunListener constructor.
@@ -44,7 +41,6 @@ class LoadQueueListener
         }
     }
 
-
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
      * @param LoadQueueEvent            $event
@@ -53,19 +49,18 @@ class LoadQueueListener
      */
     public function onLoadQueueListenerQuery(LoadQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $kind           = $event->getKind();
-        $table          = $event->getQueueTable();
-        $count          = $event->getCount();
-        $query          = "SELECT * FROM $table WHERE ";
-        $query         .= " kind = '$kind'";
-        $query         .= " AND endworking = 0";
-        $query         .= " AND startworking = 0";
-        $query         .= " AND (intervaltorun != 0 OR intervaltorun = '')";
-        $query         .= " ORDER BY priority, id";
-        $query         .= " LIMIT 0,$count";
+        $kind = $event->getKind();
+        $table = $event->getQueueTable();
+        $count = $event->getCount();
+        $query = "SELECT * FROM $table WHERE ";
+        $query .= " kind = '$kind'";
+        $query .= ' AND endworking = 0';
+        $query .= ' AND startworking = 0';
+        $query .= " AND (intervaltorun != 0 OR intervaltorun = '')";
+        $query .= ' ORDER BY priority, id';
+        $query .= " LIMIT 0,$count";
         $event->setQuery($query);
     }
-
 
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
@@ -75,7 +70,7 @@ class LoadQueueListener
      */
     public function onLoadQueueListenerRun(LoadQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $query  = $event->getQuery();
+        $query = $event->getQuery();
         $result = $this->database->execute($query);
         $event->setEvents($result);
     }

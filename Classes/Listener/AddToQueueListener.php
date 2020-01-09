@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -22,14 +22,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class AddToQueueListener
 {
-
-
     /**
      * Instanz von \Contao\Database
      * @var \Contao\Database|null
      */
     protected $database = null;
-
 
     /**
      * ExportRunListener constructor.
@@ -44,7 +41,6 @@ class AddToQueueListener
         }
     }
 
-
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
      * @param AddToQueueEvent          $event
@@ -53,14 +49,14 @@ class AddToQueueListener
      */
     public function onAddToQueueListenerLoadOldData(AddToQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $table          = $event->getQueueTable();
-        $srctable       = $event->getSrctable();
-        $srcid          = $event->getSrcid();
-        $query          = "INSERT INTO $table SET ";
+        $table = $event->getQueueTable();
+        $srctable = $event->getSrctable();
+        $srcid = $event->getSrcid();
+        $query = "INSERT INTO $table SET ";
 
         if ($srctable && $srcid) {
-            $loadQuery  = "SELECT * FROM $table WHERE srctable = '$srctable' AND srcid = $srcid";
-            $loadQuery .= " AND startworking = 0 AND endworking = 0";
+            $loadQuery = "SELECT * FROM $table WHERE srctable = '$srctable' AND srcid = $srcid";
+            $loadQuery .= ' AND startworking = 0 AND endworking = 0';
             $loadResult = $this->database->execute($loadQuery);
 
             if ($loadResult->numRows) {
@@ -71,7 +67,6 @@ class AddToQueueListener
         $event->setQuery($query);
     }
 
-
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
      * @param AddToQueueEvent          $event
@@ -80,8 +75,8 @@ class AddToQueueListener
      */
     public function onAddToQueueListenerQueryKind(AddToQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $table          = $event->getQueueTable();
-        $oldData        = $event->getOldData();
+        $table = $event->getQueueTable();
+        $oldData = $event->getOldData();
 
         if ($oldData) {
             $event->setQuery("UPDATE $table SET ");
@@ -89,7 +84,6 @@ class AddToQueueListener
             $event->setQuery("INSERT INTO $table SET ");
         }
     }
-
 
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
@@ -99,27 +93,26 @@ class AddToQueueListener
      */
     public function onAddToQueueListenerQuery(AddToQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $query          = $event->getQuery();
-        $eventToSave    = $event->getEvent();
-        $eventToSave    = serialize($eventToSave);
-        $eventToSave    = urlencode($eventToSave);  // Ohne urlencode speichert Contao das serialisierte Event nicht!
-        $kind           = $event->getKind();
-        $priotity       = $event->getPriority();
-        $srcmodule      = $event->getSrcmodule();
-        $srctable       = $event->getSrctable();
-        $srcid          = $event->getSrcid();
-        $interval       = $event->getIntervalkind();
-        $query         .= "tstamp = " . time();
-        $query         .= ", kind = '$kind'";
-        $query         .= ", priority = $priotity";
-        $query         .= ", data = '$eventToSave'";
-        $query         .= ", srcmodule = '$srcmodule'";
-        $query         .= ", srcid = $srcid";
-        $query         .= ", srctable = '$srctable'";
-        $query         .= ", intervalkind = '$interval'";
+        $query = $event->getQuery();
+        $eventToSave = $event->getEvent();
+        $eventToSave = serialize($eventToSave);
+        $eventToSave = urlencode($eventToSave);  // Ohne urlencode speichert Contao das serialisierte Event nicht!
+        $kind = $event->getKind();
+        $priotity = $event->getPriority();
+        $srcmodule = $event->getSrcmodule();
+        $srctable = $event->getSrctable();
+        $srcid = $event->getSrcid();
+        $interval = $event->getIntervalkind();
+        $query .= 'tstamp = ' . time();
+        $query .= ", kind = '$kind'";
+        $query .= ", priority = $priotity";
+        $query .= ", data = '$eventToSave'";
+        $query .= ", srcmodule = '$srcmodule'";
+        $query .= ", srcid = $srcid";
+        $query .= ", srctable = '$srctable'";
+        $query .= ", intervalkind = '$interval'";
         $event->setQuery($query);
     }
-
 
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.
@@ -129,17 +122,16 @@ class AddToQueueListener
      */
     public function onAddToQueueListenerQueryWhere(AddToQueueEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        $oldData        = $event->getOldData();
-        $query          = $event->getQuery();
-        $srctable       = $event->getSrctable();
-        $srcid          = $event->getSrcid();
+        $oldData = $event->getOldData();
+        $query = $event->getQuery();
+        $srctable = $event->getSrctable();
+        $srcid = $event->getSrcid();
 
         if ($oldData) {
             $query .= " WHERE srctable = '$srctable' AND srcid = $srcid AND startworking = 0 AND endworking = 0";
             $event->setQuery($query);
         }
     }
-
 
     /**
      * Löscht die Tabelle vor dem Einfügen neuer Daten, falls gewünscht.

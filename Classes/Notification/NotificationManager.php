@@ -4,7 +4,7 @@
  * the gis-kit for Contao CMS.
  *
  * @package    con4gis
- * @version    6
+ * @version    7
  * @author     con4gis contributors (see "authors.txt")
  * @license    LGPL-3.0-or-later
  * @copyright  Küstenschmiede GmbH Software & Design
@@ -18,21 +18,17 @@ namespace con4gis\QueueBundle\Classes\Notification;
  */
 class NotificationManager
 {
-
-
     /**
      * Gruppe der Mitteiluungen im Auswahlfeld 'Benachrichtigungstyp'
      * @var string
      */
     protected $group = 'con4gis - QueueMessage';
 
-
     /**
      * Felder, für die die InsertTags zur Verfügung stehen sollen.
      * @var array
      */
-    protected $mailFields = array('email_subject', 'email_text', 'email_html');
-
+    protected $mailFields = ['email_subject', 'email_text', 'email_html'];
 
     /**
      * InsertTags, die erstellt werden sollen.
@@ -41,8 +37,7 @@ class NotificationManager
      * gesetzt.
      * @var array
      */
-    protected $tags = array('queueName', 'kind', 'content', 'msgKey', 'msgType');
-
+    protected $tags = ['queueName', 'kind', 'content', 'msgKey', 'msgType'];
 
     /**
      * initializeSystem-Hook: Erstellt die Notification-Types.
@@ -52,7 +47,7 @@ class NotificationManager
         if (isset($GLOBALS['con4gis']['queue']['notificationtypes']) &&
             is_array($GLOBALS['con4gis']['queue']['notificationtypes']) &&
             count($GLOBALS['con4gis']['queue']['notificationtypes'])
-        ){
+        ) {
             foreach ($GLOBALS['con4gis']['queue']['notificationtypes'] as $nt => $kinds) {
                 foreach ($kinds as $key => $kind) {
                     if (is_array($kind)) {
@@ -68,7 +63,6 @@ class NotificationManager
             }
         }
     }
-
 
     /**
      * Erstellt das Array mit den InsertTags für die Nachrichtentypen.
