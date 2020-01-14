@@ -27,8 +27,6 @@ if(TL_MODE == "BE") {
     $GLOBALS['TL_CSS'][] = '/bundles/con4gisqueue/css/con4gis.css';
 }
 
-//$GLOBALS['BE_MOD']['con4gis'] =
-//    \con4gis\CoreBundle\Resources\contao\classes\C4GUtils::sortBackendModules($GLOBALS['BE_MOD']['con4gis']);
 /**
  * HOOK
  */

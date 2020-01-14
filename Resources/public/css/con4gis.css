@@ -15,3 +15,7 @@
 li .c4g_queue {
   display: none !important;
 }
+
+li .active .c4g_queue {
+  display: block !important;
+}
