@@ -11,8 +11,6 @@
  * @link       https://www.con4gis.org
  */
 
-$GLOBALS['con4gis']['queue']['installed'] = true;
-
 /**
  * Backend modules
  */
