@@ -17,7 +17,9 @@
 $GLOBALS['BE_MOD']['con4gis'] = array_merge($GLOBALS['BE_MOD']['con4gis'], array(
     'c4g_queue' => array
     (
-        'tables' => array('tl_c4g_queue')
+        'brick'  => 'queue',
+        'tables' => array('tl_c4g_queue'),
+        'icon'   => 'bundles/con4gisqueue/images/be-icons/import_queue_2.svg'
     )
 ));
 
