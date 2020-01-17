@@ -50,7 +50,8 @@ $GLOBALS['TL_DCA'][$strName] = array
 			'mode'                    => 1,
 			'fields'                  => array('tstamp', 'priority'),
             'panelLayout'             => 'filter,limit',
-			'flag'                    => 6
+			'flag'                    => 6,
+            'icon'                    => 'bundles/con4giscore/images/be-icons/con4gis.org_dark.svg',
 		),
 		'label' => array
 		(
@@ -94,12 +95,12 @@ $GLOBALS['TL_DCA'][$strName] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG'][$strName]['show'],
 				'href'                => 'act=show',
-				'icon'                => 'show.gif'
+				'icon'                => 'show.svg'
 			),
             'check' => array
             (
                 'label'               => &$GLOBALS['TL_LANG'][$strName]['check'],
-                'icon'                => 'web/bundles/con4gisqueue/status-away.png',
+                'icon'                => 'web/bundles/con4gisqueue/status-away.svg',
                 'button_callback'     => array('\con4gis\QueueBundle\Classes\Contao\Callbacks\TlC4gQueue', 'cbGenCheckButton')
             )
 		)

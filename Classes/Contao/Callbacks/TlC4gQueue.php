@@ -35,21 +35,21 @@ class TlC4gQueue
                 // Job wurde bearbeitet
                 if ($row['haserror']) {
                     // Job mit Fehler abgeschlossen
-                    $icon = "$path/exclamation.png";
+                    $icon = "$path/exclamation.svg";
                     $msg = 'error';
                 } else {
                     // Job ohne Fehler abgeschlossen
-                    $icon = "$path/tick.png";
+                    $icon = "$path/tick.svg";
                     $msg = 'success';
                 }
             } else {
                 // Job wird gerade bearbeitet
-                $icon = "$path/control.png";
+                $icon = "$path/control.svg";
                 $msg = 'running';
             }
         } else {
             // Job wartet auf Bearbeitung
-            $icon = "$path/clock.png";
+            $icon = "$path/clock.svg";
             $msg = 'waiting';
         }
 
@@ -102,7 +102,7 @@ class TlC4gQueue
                 $temp = $event->getError();
                 $content = (is_array($temp)) ? implode('<br>', $temp) : $temp;
 
-                $icon = str_replace('-away.png', '-busy.png', $icon);
+                $icon = str_replace('-away.png', '-busy.svg', $icon);
                 $icon = Image::getHtml($icon, $label);
                 $content = str_replace('"', '', $content);
                 $content = str_replace("\n", '<br>', $content);
@@ -118,7 +118,7 @@ class TlC4gQueue
         }
 
         if ($row['endworking']) {
-            $icon = str_replace('-away.png', '.png', $icon);
+            $icon = str_replace('-away.svg', '.png', $icon);
         }
 
         // Überprüfung ohne Fehler abgeschlossen
