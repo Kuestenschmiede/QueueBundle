@@ -36,7 +36,7 @@ $GLOBALS['con4gis']['api']['key']['queue'] = '$6$D.AAHGlxy6$CMTMiG6yfiPrbdTb0ejE
 
 
 /**
- * Tabellen, in denen die Datensätze nur von einem Amin gellöscht werden dürfen
+ * Tabellen, in denen die Datensätze nur von einem Admin gelöscht werden dürfen
  */
 $GLOBALS['con4gis']['rightsManagement']['undeletebleTabels'][] = 'tl_c4g_queue';
 
