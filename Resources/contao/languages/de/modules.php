@@ -13,7 +13,7 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['c4g_queue'] = array('Queue', 'Stapelverarbeitung verschiedener Prozesse (Jobs).');
+$GLOBALS['TL_LANG']['MOD']['c4g_queue'] = array('Warteschlange', 'Stapelverarbeitung verschiedener Prozesse (Jobs).');
 
 
 /**
