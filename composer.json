@@ -22,8 +22,8 @@
     "issues": "https://github.com/Kuestenschmiede/QueueBundle/issues"
   },
   "require": {
-    "contao/core-bundle": "^4.4",
-    "con4gis/core": "^4.2"
+    "contao/core-bundle": "^4.9",
+    "con4gis/core": "^5.0"
   },
   "conflict": {
     "contao/core": "*",
