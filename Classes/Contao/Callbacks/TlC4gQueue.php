@@ -26,7 +26,7 @@ class TlC4gQueue
      */
     public function cbGenJobLabel($row, $label)
     {
-        $path = 'bundles/con4gisqueue';
+        $path = 'bundles/con4gisqueue/images/be-icons';
 
         if ($row['startworking']) {
             if ($row['endworking']) {
