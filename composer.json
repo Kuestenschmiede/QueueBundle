@@ -23,7 +23,7 @@
   },
   "require": {
     "contao/core-bundle": "^4.9",
-    "con4gis/core": "^5.0"
+    "con4gis/core": "^5.1.0"
   },
   "conflict": {
     "contao/core": "*",
@@ -31,16 +31,16 @@
   },
   "autoload": {
     "psr-4": {
-      "con4gis\\QueueBundle\\": ""
+      "con4gis\\QueueBundle\\": "src/"
     },
     "classmap": [
-      "Resources/contao/"
+      "src/Resources/contao/"
     ],
     "exclude-from-classmap": [
-      "Resources/contao/config/",
-      "Resources/contao/dca/",
-      "Resources/contao/languages/",
-      "Resources/contao/templates/"
+      "src/Resources/contao/config/",
+      "src/Resources/contao/dca/",
+      "src/Resources/contao/languages/",
+      "src/Resources/contao/templates/"
     ]
   },
   "config": {
