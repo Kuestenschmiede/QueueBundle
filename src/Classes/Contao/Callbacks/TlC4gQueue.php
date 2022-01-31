@@ -5,7 +5,7 @@
  * @version 8
  * @author con4gis contributors (see "authors.txt")
  * @license LGPL-3.0-or-later
- * @copyright (c) 2010-2021, by Küstenschmiede GmbH Software & Design
+ * @copyright (c) 2010-2022, by Küstenschmiede GmbH Software & Design
  * @link https://www.con4gis.org
  */
 namespace con4gis\QueueBundle\Classes\Contao\Callbacks;
@@ -93,7 +93,7 @@ class TlC4gQueue
     public function cbGenCheckButton($row, $href, $label, $title, $icon, $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext)
     {
         if ($row['endworking'] && $row['haserror'] && isset($row['data']) && $row['data']) {
-            $event = unserialize(urldecode($row['data']));
+            $event = \Contao\StringUtil::deserialize(urldecode($row['data']));
 
             if ($event) {
                 // Überprüfung mit Fehlern abgeschlossen
