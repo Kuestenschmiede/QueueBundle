@@ -80,7 +80,7 @@ class QueueManager
         $queueEvent->setEvent($saveEvent);
         $queueEvent->setPriority($priority);
         $this->addMetaData($queueEvent, $metaData);
-        $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
+        $this->dispatcher->dispatch($queueEvent, $queueEvent::NAME);
     }
 
     /**
@@ -117,7 +117,7 @@ class QueueManager
         $queueEvent = new LoadQueueEvent();
         $queueEvent->setKind($eventname);
         $queueEvent->setCount($count);
-        $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
+        $this->dispatcher->dispatch($queueEvent, $queueEvent::NAME);
 
         return $queueEvent->getEvents();
     }
@@ -130,7 +130,7 @@ class QueueManager
     {
         $queueEvent = new QueueSetStartTimeEvent();
         $queueEvent->setId($id);
-        $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
+        $this->dispatcher->dispatch($queueEvent, $queueEvent::NAME);
     }
 
     /**
@@ -184,7 +184,7 @@ class QueueManager
             $queueEvent->setIntervalToRun($intervalToRun);
         }
 
-        $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
+        $this->dispatcher->dispatch($queueEvent, $queueEvent::NAME);
     }
 
     /**
@@ -195,7 +195,7 @@ class QueueManager
     {
         $queueEvent = new QueueSetErrorEvent();
         $queueEvent->setId($id);
-        $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
+        $this->dispatcher->dispatch($queueEvent, $queueEvent::NAME);
     }
 
     /**
@@ -209,7 +209,7 @@ class QueueManager
             $queueEvent = new QueueSaveJobResultEvent();
             $queueEvent->setId($id);
             $queueEvent->setData($jobEvent);
-            $this->dispatcher->dispatch($queueEvent::NAME, $queueEvent);
+            $this->dispatcher->dispatch($queueEvent, $queueEvent::NAME);
         }
     }
 
@@ -224,7 +224,7 @@ class QueueManager
         $event = \Contao\StringUtil::deserialize($event);
 
         if ($event) {
-            $this->dispatcher->dispatch($event::NAME, $event);
+            $this->dispatcher->dispatch($event, $event::NAME);
 
             if ($event->getHasError()) {
                 $this->setError($queueEvent->id);
@@ -253,7 +253,7 @@ class QueueManager
         $event->setContent($content);
         $event->setKind($kind);
         $event->setParam($param);
-        $this->dispatcher->dispatch($event::NAME, $event);
+        $this->dispatcher->dispatch($event, $event::NAME);
     }
 
     /**
