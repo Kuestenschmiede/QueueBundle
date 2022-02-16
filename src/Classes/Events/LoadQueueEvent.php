@@ -11,7 +11,7 @@
 namespace con4gis\QueueBundle\Classes\Events;
 
 use Database\Result;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class LoadQueueEvent
