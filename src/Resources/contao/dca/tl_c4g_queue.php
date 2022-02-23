@@ -111,7 +111,6 @@ $GLOBALS['TL_DCA'][$strName] = array
 		),
         'kind' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['kind'],
             'default'                 => '',
             'exclude'                 => true,
             'filter'                  => true,
@@ -121,7 +120,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'priority' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['priority'],
             'exclude'                 => true,
             'filter'                  => true,
             'inputType'               => 'text',
@@ -131,7 +129,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'startworking' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['startworking'],
             'default'                 => '',
             'exclude'                 => true,
             'flag'                    => 6,
@@ -141,7 +138,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'endworking' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['endworking'],
             'default'                 => '0',
             'exclude'                 => true,
             'flag'                    => 6,
@@ -151,7 +147,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'haserror' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['haserror'],
             'default'                 => '',
             'exclude'                 => true,
             'filter'                  => true,
@@ -160,7 +155,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'data' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['data'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
@@ -169,7 +163,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'srcmodule' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['srcmodule'],
             'default'                 => '',
             'exclude'                 => true,
             'filter'                  => true,
@@ -179,7 +172,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'srctable' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['srctable'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
@@ -188,7 +180,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'srcid' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['srcid'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
@@ -197,7 +188,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'intervalkind' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['intervalkind'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
@@ -206,7 +196,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'intervalcount' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['intervalcount'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
@@ -215,7 +204,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'intervaltorun' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG'][$strName]['intervaltorun'],
             'default'                 => '',
             'exclude'                 => true,
             'inputType'               => 'text',
