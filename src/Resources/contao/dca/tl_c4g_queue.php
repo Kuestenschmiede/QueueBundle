@@ -8,19 +8,11 @@
  * @copyright (c) 2010-2022, by Küstenschmiede GmbH Software & Design
  * @link https://www.con4gis.org
  */
-/**
- * Set Tablename
- */
+
 $strName = 'tl_c4g_queue';
 
-
-/**
- * Table tl_c4g_queue
- */
 $GLOBALS['TL_DCA'][$strName] = array
 (
-
-	// Config
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
@@ -39,8 +31,6 @@ $GLOBALS['TL_DCA'][$strName] = array
 			)
 		)
 	),
-
-	// List
 	'list' => array
 	(
 		'sorting' => array
@@ -69,19 +59,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                 ],
 		),
 		'operations' => array
-		(/*
-			'edit' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG'][$strName]['edit'],
-				'href'                => 'act=edit',
-				'icon'                => 'edit.svg',
-			),
-			'copy' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG'][$strName]['copy'],
-				'href'                => 'act=copy',
-				'icon'                => 'copy.svg'
-			),*/
+		(
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG'][$strName]['delete'],
@@ -103,33 +81,23 @@ $GLOBALS['TL_DCA'][$strName] = array
             )
 		)
 	),
-
-	// Select
 	'select' => array
 	(
 		'buttons_callback' => array()
 	),
-
-	// Edit
 	'edit' => array
 	(
 		'buttons_callback' => array()
 	),
-
-	// Palettes
 	'palettes' => array
 	(
 		'__selector__'                => array(''),
 		'default'                     => '{data_legend},kind,srcmodule,priority,startworking,endworking,haserror,;'
 	),
-
-	// Subpalettes
 	'subpalettes' => array
 	(
 		''                            => ''
 	),
-
-	// Fields
 	'fields' => array
 	(
 		'id' => array
@@ -188,7 +156,6 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'                 => true,
             'filter'                  => true,
             'inputType'               => 'checkbox',
-            //'eval'                    => array(),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
         'data' => array
