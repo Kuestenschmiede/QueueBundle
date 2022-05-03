@@ -29,7 +29,7 @@ class RightsManager
         ) {
             $objUser = BackendUser::getInstance();
 
-            if ($objUser->isAdmin) {
+            if ($objUser->admin) {
                 $GLOBALS['TL_DCA'][$name]['config']['notDeletable'] = false;
             } else {
                 unset($GLOBALS['TL_DCA'][$name]['list']['operations']['delete']);
