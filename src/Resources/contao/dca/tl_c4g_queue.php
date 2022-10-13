@@ -76,7 +76,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'check' => array
             (
                 'label'               => &$GLOBALS['TL_LANG'][$strName]['check'],
-                'icon'                => 'web/bundles/con4gisqueue/status-away.svg',
+                'icon'                => 'bundles/con4gisqueue/status-away.svg',
                 'button_callback'     => array('\con4gis\QueueBundle\Classes\Contao\Callbacks\TlC4gQueue', 'cbGenCheckButton')
             )
 		)
