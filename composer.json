@@ -22,8 +22,8 @@
     "issues": "https://github.com/Kuestenschmiede/QueueBundle/issues"
   },
   "require": {
-    "php": "^7.4 || ^8.0",
-    "con4gis/core": "^6.0 || ^7.0"
+    "php": "^8.0",
+    "con4gis/core": "^7.0"
   },
   "conflict": {
     "contao/core": "*",
@@ -49,7 +49,7 @@
   "extra": {
     "contao-manager-plugin": "con4gis\\QueueBundle\\ContaoManager\\Plugin",
     "branch-alias": {
-      "dev-main": "1.5.x-dev"
+      "dev-main": "1.6.x-dev"
     }
   }
 }

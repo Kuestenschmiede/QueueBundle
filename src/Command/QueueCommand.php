@@ -2,16 +2,16 @@
 /*
  * This file is part of con4gis, the gis-kit for Contao CMS.
  * @package con4gis
- * @version 8
+ * @version 10
  * @author con4gis contributors (see "authors.txt")
  * @license LGPL-3.0-or-later
- * @copyright (c) 2010-2022, by Küstenschmiede GmbH Software & Design
+ * @copyright (c) 2010-2025, by Küstenschmiede GmbH Software & Design
  * @link https://www.con4gis.org
  */
 namespace con4gis\QueueBundle\Command;
 
 use con4gis\QueueBundle\Classes\Queue\QueueManager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Class QueueCommand
  * @package con4gis\QueueBundle\Command
  */
-class QueueCommand extends ContainerAwareCommand
+class QueueCommand extends Command
 {
 
     /**
